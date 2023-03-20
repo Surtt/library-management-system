@@ -1,8 +1,9 @@
+import { Box, Button, Grid, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Box, Grid, Typography } from '@mui/material'
 
 import { decrement, increment } from './features/counter/counterSlice'
 import { RootState } from './store'
+
 import './App.css'
 
 function App() {
