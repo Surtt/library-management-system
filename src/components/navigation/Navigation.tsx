@@ -12,10 +12,10 @@ import {
   Typography,
 } from '@mui/material';
 
-type Navigation = {
-  name: string;
-  link: string;
-};
+// type Navigation = {
+//   name: string;
+//   link: string;
+// };
 
 // const navigationData: Navigation[] = [
 //   {
