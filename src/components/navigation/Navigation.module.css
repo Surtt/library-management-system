@@ -1,0 +1,8 @@
+.navigationList {
+    display: flex;
+    column-gap: 16px;
+}
+
+.navigationItem {
+    font-weight: 700;
+}

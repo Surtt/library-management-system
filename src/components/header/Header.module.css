@@ -1,0 +1,11 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+
+}
+
+.headerContainer {
+    background-color: var(--mui-palette-primary-light);
+}
