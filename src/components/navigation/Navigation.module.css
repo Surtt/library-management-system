@@ -4,5 +4,16 @@
 }
 
 .navigationItem {
-    font-weight: 700;
+    font-weight: 700 !important;
+}
+
+.navigationContainer {
+    display: flex;
+    align-items:  center;
+    column-gap: 20px;
+}
+
+.navigationAvatar {
+    width: 28px;
+    height: 28px;
 }

@@ -1,16 +1,16 @@
 import React from 'react';
+import { QueryClientProvider } from '@tanstack/react-query';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
 
+import { queryClient } from './react-query/queryClient';
 import App from './App';
-import { store } from './store';
 
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
       <App />
-    </Provider>
+    </QueryClientProvider>
   </React.StrictMode>,
 );

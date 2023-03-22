@@ -1,5 +1,5 @@
 import React from 'react';
-import { Logout, PersonAdd, Settings } from '@mui/icons-material';
+import { Logout } from '@mui/icons-material';
 import {
   Avatar,
   Box,
@@ -11,6 +11,8 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+
+import styles from './Navigation.module.css';
 
 // type Navigation = {
 //   name: string;
@@ -38,20 +40,19 @@ const Navigation = () => {
     setAnchorEl(null);
   };
   return (
-    <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Typography sx={{ minWidth: 100 }}>My Books</Typography>
-        <Typography sx={{ minWidth: 100 }}>Log In</Typography>
+    <>
+      <Box className={styles.navigationContainer}>
+        <Typography className={styles.navigationItem}>My Books</Typography>
+        <Typography className={styles.navigationItem}>Log In</Typography>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar className={styles.navigationAvatar}>M</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -81,7 +82,7 @@ const Navigation = () => {
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
+              backgroundColor: 'background.paper',
               transform: 'translateY(-50%) rotate(45deg)',
               zIndex: 0,
             },
@@ -99,24 +100,12 @@ const Navigation = () => {
         <Divider />
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>
       </Menu>
-    </React.Fragment>
+    </>
   );
 };
 

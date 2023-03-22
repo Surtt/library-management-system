@@ -1,19 +1,22 @@
 import { Container } from '@mui/material';
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
 
+import Books from './components/books/Books';
 import Header from './components/header/Header';
+import Loading from './components/loading/Loading';
 
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <CssVarsProvider>
       <Header />
       <Container maxWidth="lg">
-        {/*<Grid maxWidth="xl" container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}></Grid>*/}
+        <Loading />
+        <Books />
       </Container>
     </CssVarsProvider>
   );
-}
+};
 
 export default App;
