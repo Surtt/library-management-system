@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { useBooks } from '@/queries/useBooks';
 
-import Book from './Book';
+import Book from './book';
 
 const Books = () => {
   const [books, errorBooks] = useBooks();

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Logout } from '@mui/icons-material';
 import {
   Avatar,
@@ -11,27 +11,17 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
 
-import styles from './Navigation.module.css';
-
-// type Navigation = {
-//   name: string;
-//   link: string;
-// };
-
-// const navigationData: Navigation[] = [
-//   {
-//     name: 'My Books',
-//     link: '/my-books',
-//   },
-//   {
-//     name: 'Log In',
-//     link: '/login',
-//   },
-// ];
+import { useStateContext } from '@/context';
 
 const Navigation = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const stateContext = useStateContext();
+  const user = stateContext.state.authUser;
+  const nameAvatar = user?.name.slice(0, 1);
+  const [, , removeCookie] = useCookies(['logged_in']);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -39,22 +29,38 @@ const Navigation = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout = () => {
+    removeCookie('logged_in', {
+      path: '/',
+      domain: 'localhost',
+    });
+    stateContext.dispatch({
+      type: 'SET_USER',
+      payload: null,
+    });
+  };
+
   return (
     <>
-      <Box className={styles.navigationContainer}>
-        <Typography className={styles.navigationItem}>My Books</Typography>
-        <Typography className={styles.navigationItem}>Log In</Typography>
-        <Tooltip title="Account settings">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-          >
-            <Avatar className={styles.navigationAvatar}>M</Avatar>
-          </IconButton>
-        </Tooltip>
+      <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 2 }}>
+        <Typography sx={{ fontWeight: 700 }}>My Books</Typography>
+        <Link to="/login">
+          <Typography sx={{ fontWeight: 700 }}>{!user && 'Log In'}</Typography>
+        </Link>
+        {user && (
+          <Tooltip title="Account settings">
+            <IconButton
+              onClick={handleClick}
+              size="small"
+              aria-controls={open ? 'account-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+            >
+              <Avatar sx={{ width: 38, height: 38 }}>{nameAvatar}</Avatar>
+            </IconButton>
+          </Tooltip>
+        )}
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -94,11 +100,8 @@ const Navigation = () => {
         <MenuItem onClick={handleClose}>
           <Avatar /> Profile
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
-        </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

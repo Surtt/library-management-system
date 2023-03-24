@@ -4,6 +4,8 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
+import { StateContextProvider } from '@/context';
+
 import { queryClient } from './queries/queryClient';
 import App from './App';
 
@@ -13,9 +15,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_KEY}>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <StateContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </StateContextProvider>
       </QueryClientProvider>
     </GoogleOAuthProvider>
   </React.StrictMode>,

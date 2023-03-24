@@ -2,14 +2,18 @@ import React from 'react';
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import jwtDecode from 'jwt-decode';
 import { useCookies } from 'react-cookie';
-import { toast, ToastContainer } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { IUser, useUser } from '@/components/layout/Layout';
+import { useStateContext } from '@/context';
+import { IUser } from '@/types';
 
-const Login = () => {
-  const { setUser } = useUser();
+const LoginPage = () => {
   const [, setCookie] = useCookies(['logged_in']);
+  const stateContext = useStateContext();
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  const from = (location.state?.from.pathname as string) || '/';
   return (
     <div>
       <p>Login</p>
@@ -19,19 +23,20 @@ const Login = () => {
           const credential = credentialResponse.credential;
           if (typeof credential === 'string') {
             const decode: IUser = jwtDecode(credential);
-            setUser({ name: decode.name, email: decode.email });
+            stateContext.dispatch({
+              type: 'SET_USER',
+              payload: { name: decode.name, email: decode.email },
+            });
           }
           setCookie('logged_in', credential, { path: '/', maxAge: 360000 });
-
-          toast.success('Success', { position: 'top-right' });
-          return <ToastContainer />;
+          navigate(from);
         }}
         onError={() => {
-          // console.log('Login Failed');
+          // console.log('LoginPage Failed');
         }}
       />
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;
