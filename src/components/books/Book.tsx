@@ -1,18 +1,15 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 
-import { IBook } from '../../types';
+import { IBook } from '@/types';
 
-const Book = ({ title, description, image }: IBook) => {
+const Book = ({ title, image }: IBook) => {
   return (
-    <Card sx={{ maxWidth: 150 }}>
-      <CardMedia sx={{ height: 140 }} image={image} title="green iguana" />
+    <Card sx={{ width: 185 }}>
+      <CardMedia sx={{ height: 250 }} image={image} title={title} />
       <CardContent>
-        <Typography gutterBottom variant="h6" component="h3">
+        <Typography gutterBottom variant="subtitle1" component="h3">
           {title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {description}
         </Typography>
       </CardContent>
     </Card>

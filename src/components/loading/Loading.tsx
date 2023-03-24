@@ -7,14 +7,14 @@ const Loading = () => {
   const isMutating = useIsMutating();
   return (
     <>
-      {(isFetching || isMutating) && (
+      {isFetching || isMutating ? (
         <>
           <CircularProgress />
           <Typography variant="body2" color="text.secondary">
             Loading...
           </Typography>
         </>
-      )}
+      ) : null}
     </>
   );
 };

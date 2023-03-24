@@ -3,10 +3,14 @@ import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-function queryErrorHandler(error: unknown): void {
+const querySuccessHandler = (): void => {
+  toast.success('Success', { position: 'top-right' });
+};
+
+const queryErrorHandler = (error: unknown): void => {
   const title = error instanceof Error ? error.message : 'error connecting to server';
   toast.error(title, { position: 'top-right' });
-}
+};
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,9 +23,11 @@ export const queryClient = new QueryClient({
     },
   },
   queryCache: new QueryCache({
+    onSuccess: querySuccessHandler,
     onError: queryErrorHandler,
   }),
   mutationCache: new MutationCache({
+    onSuccess: querySuccessHandler,
     onError: queryErrorHandler,
   }),
 });

@@ -2,15 +2,15 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { ToastContainer } from 'react-toastify';
 
-import { useBooks } from '../../react-query/useBooks';
+import { useBooks } from '@/queries/useBooks';
 
 import Book from './Book';
 
 const Books = () => {
-  const [books, error] = useBooks();
+  const [books, errorBooks] = useBooks();
   return (
     <>
-      {error && <ToastContainer />}
+      {errorBooks && <ToastContainer />}
       <Box
         component="section"
         sx={{

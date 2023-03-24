@@ -1,3 +1,5 @@
+import { ICategory } from '@/types/category';
+
 import { TStatus } from './book-status';
 
 export interface IBook {
@@ -12,5 +14,5 @@ export interface IBook {
   borrowDate: string;
   returnDate: string;
   image: string;
-  category: string;
+  categories: ICategory[];
 }
