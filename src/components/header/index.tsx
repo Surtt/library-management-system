@@ -1,13 +1,42 @@
-import React from 'react';
-import { Box, Container, Grid, useTheme } from '@mui/material';
+import React, { ChangeEvent, useState } from 'react';
+import {
+  Box,
+  Container,
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  TextField,
+  useTheme,
+} from '@mui/material';
 
 import Logo from '@/components/logo';
 import Navigation from '@/components/navigation';
+import useDebounce from '@/hooks/useDebounce';
+import { useBooks } from '@/queries/useBooks';
 
 const Header = () => {
   const theme = useTheme();
+  const [searchValue, setSearchValue] = useState('');
+  const debouncedSearch = useDebounce(searchValue, 300);
+  const [books] = useBooks({ debouncedSearch });
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const searchedData = () => {
+    if (debouncedSearch) {
+      return books.filter((book) =>
+        book.title.toLowerCase().includes(debouncedSearch.toLowerCase()),
+      );
+    } else {
+      return [];
+    }
+  };
   return (
-    <Grid sx={{ backgroundColor: theme.palette.primary.light }} container>
+    <Grid container>
       <Container maxWidth="lg">
         <Box
           component="header"
@@ -20,6 +49,33 @@ const Header = () => {
           }}
         >
           <Logo />
+          <Box sx={{ position: 'relative' }}>
+            <TextField
+              onChange={handleSearch}
+              sx={{ width: 300, '& input': { padding: 2 } }}
+              id="outlined-search"
+              label="Search field"
+              type="search"
+            />
+            {debouncedSearch && (
+              <List
+                sx={{
+                  position: 'absolute',
+                  width: '100%',
+                  backgroundColor: theme.palette.common.white,
+                  boxShadow: theme.shadows,
+                }}
+              >
+                {searchedData().map((book) => (
+                  <ListItem key={book.ISBN}>
+                    <ListItemButton>
+                      <ListItemText>{book.title}</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            )}
+          </Box>
           <Navigation />
         </Box>
       </Container>

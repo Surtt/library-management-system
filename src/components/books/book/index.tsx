@@ -5,7 +5,7 @@ import { IBook } from '@/types';
 
 const Book = ({ title, image }: IBook) => {
   return (
-    <Card sx={{ width: 185 }}>
+    <Card sx={{ width: 175 }}>
       <CardMedia sx={{ height: 250 }} image={image} title={title} />
       <CardContent>
         <Typography gutterBottom variant="subtitle1" component="h3">

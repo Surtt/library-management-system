@@ -28,6 +28,7 @@ html, body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  background-color: wheat;
 }
 
 img, picture, video, canvas, svg {

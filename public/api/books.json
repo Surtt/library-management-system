@@ -1,6 +1,6 @@
 [{
   "ISBN": "092742647-1",
-  "title": "The Last Diamond",
+  "title": "JavaScript from Beginner to Professional",
   "description": "Acute lymphadenitis of trunk",
   "publisher": "Music",
   "authors": "Desi Sainte Paul",
@@ -13,7 +13,7 @@
   "categories": ["1"]
 }, {
   "ISBN": "757379694-3",
-  "title": "Killer McCoy",
+  "title": "Learn JavaScript Quickly",
   "description": "Other contact with other mammals, sequela",
   "publisher": "Automotive",
   "authors": "Flin Sighart",
@@ -26,7 +26,7 @@
   "categories": ["1"]
 }, {
   "ISBN": "817782679-4",
-  "title": "Hit and Runway",
+  "title": "Mastering Python Networking",
   "description": "Non-pressure chronic ulcer of right calf w necrosis of bone",
   "publisher": "Toys",
   "authors": "Yoko Philpott",
@@ -39,7 +39,7 @@
   "categories": ["1"]
 }, {
   "ISBN": "277530292-0",
-  "title": "Sweeney Todd: The Demon Barber of Fleet Street",
+  "title": "iOS Programming for Beginners",
   "description": "Acute hematogenous osteomyelitis, unspecified humerus",
   "publisher": "Clothing",
   "authors": "Cal Reast",
@@ -52,7 +52,7 @@
   "categories": ["1"]
 }, {
   "ISBN": "638503890-4",
-  "title": "The Package",
+  "title": "JavaScript The Definite Guide",
   "description": "Type 2 diab w prolif diab rtnop with trctn dtch n-mcla, bi",
   "publisher": "Shoes",
   "authors": "Charmane Feak",
@@ -65,7 +65,7 @@
   "categories": ["1"]
 }, {
   "ISBN": "599768778-3",
-  "title": "Intouchables",
+  "title": "Eloquent JavaScript",
   "description": "Enterostomy hemorrhage",
   "publisher": "Shoes",
   "authors": "Lee Pudge",
@@ -78,7 +78,7 @@
   "categories": ["1"]
 }, {
   "ISBN": "449524167-2",
-  "title": "Angel Face",
+  "title": "JavaScript for Kids",
   "description": "Nondisp fx of pisiform, left wrist, subs for fx w malunion",
   "publisher": "Beauty",
   "authors": "Celene Vanichkov",
@@ -91,7 +91,7 @@
   "categories": ["2"]
 }, {
   "ISBN": "236275333-6",
-  "title": "An Evening with Robin Williams",
+  "title": "JavaScript for Kids ",
   "description": "Exposure of other implanted mesh into organ or tissue, init",
   "publisher": "Outdoors",
   "authors": "Shaina Charnick",
@@ -104,7 +104,7 @@
   "categories": ["2"]
 }, {
   "ISBN": "947886985-X",
-  "title": "ZMD: Zombies of Mass Destruction",
+  "title": "Elementary JavaScript",
   "description": "Pathological fracture, left foot",
   "publisher": "Sports",
   "authors": "Townsend Tradewell",
@@ -117,7 +117,7 @@
   "categories": ["2"]
 }, {
   "ISBN": "690237053-2",
-  "title": "Halloweentown II: Kalabar's Revenge",
+  "title": "Coding for Kids Python",
   "description": "War operations involving rubber bullets, civilian, sequela",
   "publisher": "2",
   "authors": "Amalle Loveguard",
@@ -130,7 +130,7 @@
   "categories": ["2"]
 }, {
   "ISBN": "895942114-6",
-  "title": "Only You",
+  "title": "JavaScript Coding for Teens",
   "description": "Medial subluxation of right ulnohumeral joint, sequela",
   "publisher": "Beauty",
   "authors": "Brandtr Skaife",
@@ -143,7 +143,7 @@
   "categories": ["2"]
 }, {
   "ISBN": "908339900-1",
-  "title": "Bonfire of the Vanities",
+  "title": "Coding for Kids Ages 9-15",
   "description": "Puncture wound with foreign body, left foot",
   "publisher": "2",
   "authors": "Aryn Bromidge",

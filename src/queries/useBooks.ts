@@ -4,18 +4,15 @@ import { IBook } from '@/types';
 
 import { queryKeys } from './constants';
 
-export const useBooks = (): [IBook[], unknown, boolean, boolean, boolean] => {
-  // const {
-  //   data: books = [],
-  //   error,
-  //   isLoading,
-  //   isFetching,
-  //   isError,
-  // } = useQuery({ queryKey: [queryKeys.books], queryFn: getBooks });
-  //
-  // return [books, error, isLoading, isFetching, isError];
+type UseBooksProps = {
+  debouncedSearch?: string;
+};
+
+export const useBooks = (
+  debouncedSearch?: UseBooksProps,
+): [IBook[], unknown, boolean, boolean, boolean] => {
   const [books, error, isLoading, isFetching, isError] = useData<IBook[]>(
-    [queryKeys.books],
+    [queryKeys.books, debouncedSearch],
     getBooks,
   );
 

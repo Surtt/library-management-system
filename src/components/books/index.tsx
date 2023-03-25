@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { ToastContainer } from 'react-toastify';
 
 import { useBooks } from '@/queries/useBooks';
@@ -7,6 +7,7 @@ import { useBooks } from '@/queries/useBooks';
 import Book from './book';
 
 const Books = () => {
+  const theme = useTheme();
   const [books, errorBooks] = useBooks();
   return (
     <>
@@ -19,6 +20,9 @@ const Books = () => {
           flexWrap: 'wrap',
           marginTop: 10,
           rowGap: 2,
+          padding: 2.5,
+          backgroundColor: theme.palette.common.white,
+          borderRadius: 2,
         }}
       >
         {books.map((book) => (
