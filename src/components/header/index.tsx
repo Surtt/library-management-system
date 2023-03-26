@@ -52,7 +52,13 @@ const Header = () => {
           <Box sx={{ position: 'relative' }}>
             <TextField
               onChange={handleSearch}
-              sx={{ width: 300, '& input': { padding: 2 } }}
+              sx={{
+                width: 300,
+                backgroundColor: theme.palette.common.white,
+                borderRadius: 2,
+                '& input': { padding: 2 },
+                '& fieldset': { borderRadius: 2 },
+              }}
               id="outlined-search"
               label="Search field"
               type="search"

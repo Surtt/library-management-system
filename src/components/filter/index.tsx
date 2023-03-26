@@ -1,5 +1,6 @@
 import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import {
+  Box,
   Checkbox,
   FormControl,
   FormControlLabel,
@@ -32,7 +33,13 @@ const Filter = ({ filters, setFilter, authors }: TFilter) => {
     });
   };
   return (
-    <div>
+    <Box
+      component="section"
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
       <FormControlLabel
         control={
           <Checkbox
@@ -47,11 +54,12 @@ const Filter = ({ filters, setFilter, authors }: TFilter) => {
       <FormControl sx={{ m: 1, minWidth: 80 }}>
         <InputLabel id="author-label">Author</InputLabel>
         <Select
+          sx={{ width: 300 }}
           labelId="author-label"
           id="author"
           value={filters.author}
           onChange={handleChangeSelect}
-          autoWidth
+          fullWidth
           label="Author"
         >
           <MenuItem value="">
@@ -64,7 +72,7 @@ const Filter = ({ filters, setFilter, authors }: TFilter) => {
           ))}
         </Select>
       </FormControl>
-    </div>
+    </Box>
   );
 };
 
