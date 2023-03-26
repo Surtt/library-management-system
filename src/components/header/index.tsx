@@ -66,13 +66,15 @@ const Header = () => {
                   boxShadow: theme.shadows,
                 }}
               >
-                {searchedData().map((book) => (
-                  <ListItem key={book.ISBN}>
-                    <ListItemButton>
-                      <ListItemText>{book.title}</ListItemText>
-                    </ListItemButton>
-                  </ListItem>
-                ))}
+                {searchedData()
+                  .slice(0, 10)
+                  .map((book) => (
+                    <ListItem key={book.ISBN}>
+                      <ListItemButton>
+                        <ListItemText>{book.title}</ListItemText>
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
               </List>
             )}
           </Box>

@@ -16,3 +16,9 @@ export interface IBook {
   image: string;
   categories: ICategory[];
 }
+
+export interface IBookFilter {
+  available: boolean;
+  author: string;
+  publishedDate: string;
+}

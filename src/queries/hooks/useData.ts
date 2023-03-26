@@ -4,6 +4,7 @@ import { QueryKey, useQuery } from '@tanstack/react-query';
 const UseData = <T>(
   queryKeys: QueryKey,
   getData: QueryFunction<T>,
+  selectFn?: (data: T) => T,
 ): [T | never[], unknown, boolean, boolean, boolean] => {
   const {
     data = [],
@@ -11,7 +12,7 @@ const UseData = <T>(
     isLoading,
     isFetching,
     isError,
-  } = useQuery<T>({ queryKey: [queryKeys], queryFn: getData });
+  } = useQuery<T>({ queryKey: [queryKeys], queryFn: getData, select: selectFn });
 
   return [data, error, isLoading, isFetching, isError];
 };
