@@ -1,4 +1,8 @@
 export interface IUser {
-  name: string;
-  email: string;
+  id?: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+  role?: string | null;
+  booksIds?: string[];
 }

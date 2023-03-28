@@ -15,11 +15,15 @@ import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 
 import { useStateContext } from '@/context';
+import { logoutUser } from '@/features/users/usersSlice';
+import { useAppDispatch } from '@/hooks';
+import { useAppSelector } from '@/hooks/useAppSelector';
 
 const Navigation = () => {
+  const dispatch = useAppDispatch();
+  const { users } = useAppSelector((state) => state);
   const stateContext = useStateContext();
-  const user = stateContext.state.authUser;
-  const nameAvatar = user?.name.slice(0, 1);
+  const nameAvatar = typeof users.user?.firstName === 'string' && users.user.firstName.slice(0, 1);
   const [, , removeCookie] = useCookies(['logged_in']);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -39,6 +43,7 @@ const Navigation = () => {
       type: 'SET_USER',
       payload: null,
     });
+    dispatch(logoutUser());
   };
 
   return (
@@ -46,9 +51,9 @@ const Navigation = () => {
       <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 2 }}>
         <Typography sx={{ fontWeight: 700 }}>My Books</Typography>
         <Link to="/login">
-          <Typography sx={{ fontWeight: 700 }}>{!user && 'Log In'}</Typography>
+          <Typography sx={{ fontWeight: 700 }}>{!users?.user && 'Log In'}</Typography>
         </Link>
-        {user && (
+        {users.user && (
           <Tooltip title="Account settings">
             <IconButton
               onClick={handleClick}
@@ -97,9 +102,11 @@ const Navigation = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
-        </MenuItem>
+        <Link to="/profile">
+          <MenuItem onClick={handleClose}>
+            <Avatar /> Profile
+          </MenuItem>
+        </Link>
         <Divider />
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>

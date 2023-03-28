@@ -3,16 +3,17 @@ import { ICategory } from '@/types/category';
 import { TStatus } from './book-status';
 
 export interface IBook {
+  id: string;
   ISBN: string;
   title: string;
   description: string;
   publisher: string;
   authors: string;
   status: TStatus;
-  borrowerId: string;
+  borrowerId: string | null;
   publishedDate: string;
-  borrowDate: string;
-  returnDate: string;
+  borrowDate: string | null;
+  returnDate: string | null;
   image: string;
   categories: ICategory[];
 }

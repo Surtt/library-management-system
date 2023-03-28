@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
 import { ToastContainer } from 'react-toastify';
 
-import { useBooks } from '@/queries/useBooks';
-import { IBookFilter } from '@/types';
+import { getBooksThunk } from '@/features/books/booksSlice';
+import { useAppDispatch } from '@/hooks';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { IBook, IBookFilter } from '@/types';
 
 import Book from './book';
 
 type BooksProps = {
   filters: IBookFilter;
+  books: IBook[];
+  errorBooks: unknown;
 };
 
-const Books = ({ filters }: BooksProps) => {
-  const [books, errorBooks] = useBooks({ filters });
+const Books = ({ errorBooks }: BooksProps) => {
+  const dispatch = useAppDispatch();
+  const { books } = useAppSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(getBooksThunk());
+  }, [dispatch]);
 
   return (
     <>
@@ -27,8 +36,8 @@ const Books = ({ filters }: BooksProps) => {
           marginTop: 5,
         }}
       >
-        {books.map((book) => (
-          <Book key={book.title} {...book} />
+        {books.list.map((book) => (
+          <Book key={book.id} {...book} />
         ))}
       </Box>
     </>

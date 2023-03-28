@@ -1,17 +1,19 @@
 [{
+  "id": "be849a8c-fdea-44a6-a082-f4eecec9bbb9",
   "ISBN": "092742647-1",
   "title": "JavaScript from Beginner to Professional",
   "description": "Acute lymphadenitis of trunk",
   "publisher": "Music",
   "authors": "1",
   "status": "available",
-  "borrowerId": "4c949f8d-a73d-44f9-ac84-b27a7cccd751",
+  "borrowerId": null,
   "publishedDate": "18.12.2022",
-  "borrowDate": "29.04.2022",
-  "returnDate": "12.09.2022",
+  "borrowDate": null,
+  "returnDate": null,
   "image": "./images/book-1.jpg",
   "categories": ["1"]
 }, {
+  "id": "7c2da18f-3492-4ee5-9a14-a5ad5d7a88ae",
   "ISBN": "757379694-3",
   "title": "Learn JavaScript Quickly",
   "description": "Other contact with other mammals, sequela",
@@ -25,6 +27,7 @@
   "image": "./images/book-2.jpg",
   "categories": ["1"]
 }, {
+  "id": "b84b1ca2-2bba-4d82-b39d-c46a37db0acd",
   "ISBN": "817782679-4",
   "title": "Mastering Python Networking",
   "description": "Non-pressure chronic ulcer of right calf w necrosis of bone",
@@ -38,6 +41,7 @@
   "image": "./images/book-3.jpg",
   "categories": ["1"]
 }, {
+  "id": "e1fd3b6f-4fb0-45d0-bbfd-f347761b790d",
   "ISBN": "277530292-0",
   "title": "iOS Programming for Beginners",
   "description": "Acute hematogenous osteomyelitis, unspecified humerus",
@@ -51,6 +55,7 @@
   "image": "./images/book-4.jpg",
   "categories": ["1"]
 }, {
+  "id": "8100bf34-0c4a-4ad9-a4a0-ac3b4570a585",
   "ISBN": "638503890-4",
   "title": "JavaScript The Definite Guide",
   "description": "Type 2 diab w prolif diab rtnop with trctn dtch n-mcla, bi",
@@ -64,6 +69,7 @@
   "image": "./images/book-5.jpg",
   "categories": ["1"]
 }, {
+  "id": "b453e8df-98c1-45a1-860a-2f40b0f00e48",
   "ISBN": "599768778-3",
   "title": "Eloquent JavaScript",
   "description": "Enterostomy hemorrhage",
@@ -77,6 +83,7 @@
   "image": "./images/book-6.jpg",
   "categories": ["1"]
 }, {
+  "id": "01b8b35e-84c5-4cb5-8894-0e11563a9e01",
   "ISBN": "449524167-2",
   "title": "JavaScript for Kids",
   "description": "Nondisp fx of pisiform, left wrist, subs for fx w malunion",
@@ -90,6 +97,7 @@
   "image": "./images/book-7.jpg",
   "categories": ["2"]
 }, {
+  "id": "07ef08d3-d814-4a6a-abc4-d52cdfdf63c9",
   "ISBN": "236275333-6",
   "title": "JavaScript for Kids ",
   "description": "Exposure of other implanted mesh into organ or tissue, init",
@@ -103,6 +111,7 @@
   "image": "./images/book-8.jpg",
   "categories": ["2"]
 }, {
+  "id": "ec95c173-6a53-493d-b60a-6b26372bdf79",
   "ISBN": "947886985-X",
   "title": "Elementary JavaScript",
   "description": "Pathological fracture, left foot",
@@ -116,6 +125,7 @@
   "image": "./images/book-9.jpg",
   "categories": ["2"]
 }, {
+  "id": "905af715-f64e-436a-abe1-e2f3ed472fe3",
   "ISBN": "690237053-2",
   "title": "Coding for Kids Python",
   "description": "War operations involving rubber bullets, civilian, sequela",
@@ -129,6 +139,7 @@
   "image": "./images/book-10.jpg",
   "categories": ["2"]
 }, {
+  "id": "3e0dd4ab-1ee5-4dac-bb61-095415199be7",
   "ISBN": "895942114-6",
   "title": "JavaScript Coding for Teens",
   "description": "Medial subluxation of right ulnohumeral joint, sequela",
@@ -142,6 +153,7 @@
   "image": "./images/book-11.jpg",
   "categories": ["2"]
 }, {
+  "id": "5351287f-8629-48aa-af93-a95c7a2a4de6",
   "ISBN": "908339900-1",
   "title": "Coding for Kids Ages 9-15",
   "description": "Puncture wound with foreign body, left foot",
@@ -156,7 +168,8 @@
   "categories": ["2"]
 },
   {
-    "ISBN": "908339900-1",
+    "id": "7b3433da-9f67-4004-b6f7-7aedea6690d1",
+    "ISBN": "908339901-1",
     "title": "Coding for Kids C++",
     "description": "Puncture wound with foreign body, left foot",
     "publisher": "2",
