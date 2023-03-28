@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { faker } from '@faker-js/faker';
+import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 
-import { Extra, IBook, Status } from '@/types';
+import { Extra, IBook, Status, TAddBook, TStatus } from '@/types';
 
 type BooksState = {
   status: Status;
@@ -56,6 +57,19 @@ export const borrowBookThunk = createAsyncThunk(
 
 export const returnBookThunk = createAsyncThunk('books/returnBook', async (id: string) => {
   return id;
+});
+
+export const addBook = createAsyncThunk('books/addBook', async (book: TAddBook) => {
+  return {
+    ...book,
+    id: nanoid(),
+    publishedDate: new Date().toISOString(),
+    status: 'available' as TStatus,
+    borrowerId: null,
+    borrowDate: null,
+    returnDate: null,
+    image: faker.image.business(),
+  };
 });
 
 const booksSlice = createSlice({
@@ -116,6 +130,16 @@ const booksSlice = createSlice({
         });
       })
       .addCase(returnBookThunk.rejected, (state) => {
+        state.status = 'rejected';
+      })
+      .addCase(addBook.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addBook.fulfilled, (state, action) => {
+        state.status = 'received';
+        state.list.push(action.payload);
+      })
+      .addCase(addBook.rejected, (state) => {
         state.status = 'rejected';
       });
   },

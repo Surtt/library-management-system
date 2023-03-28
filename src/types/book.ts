@@ -23,3 +23,8 @@ export interface IBookFilter {
   author: string;
   publishedDate: string;
 }
+
+export type TAddBook = Omit<
+  IBook,
+  'id' | 'status' | 'borrowDate' | 'borrowerId' | 'returnDate' | 'image' | 'publishedDate'
+>;

@@ -102,11 +102,19 @@ const Navigation = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <Link to="/profile">
-          <MenuItem onClick={handleClose}>
-            <Avatar /> Profile
-          </MenuItem>
-        </Link>
+        {users.user?.role === 'admin' ? (
+          <Link to="/dashboard">
+            <MenuItem onClick={handleClose}>
+              <Avatar /> Dashboard
+            </MenuItem>
+          </Link>
+        ) : (
+          <Link to="/profile">
+            <MenuItem onClick={handleClose}>
+              <Avatar /> Profile
+            </MenuItem>
+          </Link>
+        )}
         <Divider />
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
