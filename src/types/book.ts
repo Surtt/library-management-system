@@ -15,7 +15,7 @@ export interface IBook {
   borrowDate: string | null;
   returnDate: string | null;
   image: string;
-  categories: ICategory[];
+  categories: ICategory['id'][];
 }
 
 export interface IBookFilter {

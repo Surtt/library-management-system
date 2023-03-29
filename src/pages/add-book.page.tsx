@@ -3,8 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Box,
   Button,
+  Checkbox,
   FormControl,
   InputLabel,
+  ListItemText,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -14,7 +16,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
-import { addBook } from '@/features/books/booksSlice';
+import { addBookThunk } from '@/features/books/booksSlice';
 import { useAppDispatch } from '@/hooks';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { TAddBook } from '@/types';
@@ -25,14 +27,25 @@ const validationSchema = z.object({
   description: z.string().min(1, { message: 'Description is required' }),
   publisher: z.string().min(1, { message: 'Publisher is required' }),
   authors: z.string().min(1, { message: 'Authors is required' }),
-  categories: z.string().min(1, { message: 'Publish date is required' }),
+  categories: z.string().array().min(1, { message: 'Categories is required' }),
 });
 
 type ValidationSchema = z.infer<typeof validationSchema>;
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
 const AddBookPage = () => {
   const dispatch = useAppDispatch();
-  const { authors } = useAppSelector((state) => state);
+  const { authors, categories } = useAppSelector((state) => state);
   const navigate = useNavigate();
   const [book, setBook] = useState<TAddBook>({
     ISBN: '',
@@ -52,7 +65,7 @@ const AddBookPage = () => {
   });
 
   const onSubmit: SubmitHandler<ValidationSchema> = () => {
-    dispatch(addBook({ ...book }));
+    dispatch(addBookThunk({ ...book }));
     navigate('/');
   };
 
@@ -63,10 +76,20 @@ const AddBookPage = () => {
     });
   };
 
-  const handleChangeSelect = (e: SelectChangeEvent) => {
+  const handleChangeSelectAuthors = (e: SelectChangeEvent) => {
     setBook({
       ...book,
       authors: e.target.value,
+    });
+  };
+
+  const handleChangeSelectCategories = (e: SelectChangeEvent<typeof book.categories>) => {
+    const {
+      target: { value },
+    } = e;
+    setBook({
+      ...book,
+      categories: typeof value === 'string' ? value.split(',') : value,
     });
   };
 
@@ -75,7 +98,6 @@ const AddBookPage = () => {
   //   dispatch(addBook({ ...book }));
   //   navigate('/');
   // };
-
   const handleBack = () => {
     navigate(-1);
   };
@@ -129,7 +151,7 @@ const AddBookPage = () => {
             labelId="author-label"
             id="author"
             value={book.authors}
-            onChange={handleChangeSelect}
+            onChange={handleChangeSelectAuthors}
             fullWidth
             label="Author"
           >
@@ -144,13 +166,32 @@ const AddBookPage = () => {
           </Select>
         </FormControl>
         {errors.authors && errors.authors.message}
-        <TextField
-          {...register('categories')}
-          onChange={handleInput}
-          id="categories"
-          label="categories"
-          variant="outlined"
-        />
+        <FormControl>
+          <InputLabel id="categories-label">Category</InputLabel>
+          <Select
+            {...register('categories')}
+            labelId="categories-label"
+            id="categories"
+            multiple
+            value={book.categories}
+            onChange={handleChangeSelectCategories}
+            // input={<OutlinedInput label="Tag" />}
+            renderValue={(selected) => selected.join(', ')}
+            MenuProps={MenuProps}
+            fullWidth
+            label="Category"
+          >
+            {/*<MenuItem value="">*/}
+            {/*  <em>None</em>*/}
+            {/*</MenuItem>*/}
+            {categories.list.map(({ id, name }) => (
+              <MenuItem key={id} value={name}>
+                <Checkbox value={id} checked={book.categories.indexOf(name) > -1} />
+                <ListItemText primary={name} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         {errors.categories && errors.categories.message}
         <Button type="submit" variant="contained" size="large">
           Add a book

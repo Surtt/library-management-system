@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Books from '@/components/books';
 import Filter from '@/components/filter';
 import { getAuthorsThunk } from '@/features/authors/authorsSlice';
+import { getCategoriesThunk } from '@/features/categories/categoriesSlice';
 import { useAppDispatch } from '@/hooks';
 import { useAuthors } from '@/queries/useAuthors';
 import { useBooks } from '@/queries/useBooks';
@@ -18,6 +19,7 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(getAuthorsThunk());
+    dispatch(getCategoriesThunk());
   }, [dispatch]);
 
   const [books = [], errorBooks] = useBooks({ filters });

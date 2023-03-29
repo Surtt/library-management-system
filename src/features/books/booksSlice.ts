@@ -59,7 +59,7 @@ export const returnBookThunk = createAsyncThunk('books/returnBook', async (id: s
   return id;
 });
 
-export const addBook = createAsyncThunk('books/addBook', async (book: TAddBook) => {
+export const addBookThunk = createAsyncThunk('books/addBook', async (book: TAddBook) => {
   return {
     ...book,
     id: nanoid(),
@@ -70,6 +70,10 @@ export const addBook = createAsyncThunk('books/addBook', async (book: TAddBook) 
     returnDate: null,
     image: faker.image.business(),
   };
+});
+
+export const deleteBookThunk = createAsyncThunk('books/deleteBook', async (id: string) => {
+  return id;
 });
 
 const booksSlice = createSlice({
@@ -132,14 +136,24 @@ const booksSlice = createSlice({
       .addCase(returnBookThunk.rejected, (state) => {
         state.status = 'rejected';
       })
-      .addCase(addBook.pending, (state) => {
+      .addCase(addBookThunk.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(addBook.fulfilled, (state, action) => {
+      .addCase(addBookThunk.fulfilled, (state, action) => {
         state.status = 'received';
         state.list.push(action.payload);
       })
-      .addCase(addBook.rejected, (state) => {
+      .addCase(addBookThunk.rejected, (state) => {
+        state.status = 'rejected';
+      })
+      .addCase(deleteBookThunk.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteBookThunk.fulfilled, (state, action) => {
+        state.status = 'received';
+        state.list = state.list.filter(({ id }) => id !== action.payload);
+      })
+      .addCase(deleteBookThunk.rejected, (state) => {
         state.status = 'rejected';
       });
   },

@@ -4,6 +4,7 @@ import axios from 'axios';
 import * as api from '@/api';
 import { authorsReducer } from '@/features/authors/authorsSlice';
 import { booksReducer } from '@/features/books/booksSlice';
+import { categoriesReducer } from '@/features/categories/categoriesSlice';
 import { usersReducer } from '@/features/users/usersSlice';
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     users: usersReducer,
     books: booksReducer,
     authors: authorsReducer,
+    categories: categoriesReducer,
   },
   middleware: (getDefaultMiddlware) =>
     getDefaultMiddlware({
