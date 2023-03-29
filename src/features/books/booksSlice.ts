@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 
-import { Extra, IBook, Status, TAddBook, TStatus } from '@/types';
+import { Extra, IBook, IUser, Status, TAddBook, TStatus } from '@/types';
 
 type BooksState = {
   status: Status;
@@ -50,7 +50,7 @@ export const getBooksThunk = createAsyncThunk<
 
 export const borrowBookThunk = createAsyncThunk(
   'books/borrowBook',
-  async (payload: { id: string; userId: string }) => {
+  async (payload: { id: string; userId: IUser['id'] }) => {
     return payload;
   },
 );
@@ -69,6 +69,24 @@ export const addBookThunk = createAsyncThunk('books/addBook', async (book: TAddB
     borrowDate: null,
     returnDate: null,
     image: faker.image.business(),
+  };
+});
+
+export const updateBookThunk = createAsyncThunk('books/updateBook', async (book: IBook) => {
+  return {
+    id: book.id,
+    ISBN: book.ISBN,
+    title: book.title,
+    description: book.description,
+    publisher: book.publisher,
+    authors: book.authors,
+    status: book.status,
+    borrowerId: book.borrowerId,
+    publishedDate: book.publishedDate,
+    borrowDate: book.borrowDate,
+    returnDate: book.returnDate,
+    image: faker.image.business(),
+    categories: book.categories,
   };
 });
 
@@ -98,18 +116,19 @@ const booksSlice = createSlice({
       .addCase(borrowBookThunk.fulfilled, (state, action) => {
         state.status = 'received';
         const { id, userId } = action.payload;
-
-        state.list = state.list.map((book: IBook) => {
-          if (book.id === id) {
-            return {
-              ...book,
-              status: 'borrowed',
-              borrowerId: userId,
-              borrowDate: new Date().toISOString(),
-            };
-          }
-          return book;
-        });
+        if (userId) {
+          state.list = state.list.map((book: IBook) => {
+            if (book.id === id) {
+              return {
+                ...book,
+                status: 'borrowed',
+                borrowerId: userId,
+                borrowDate: new Date().toISOString(),
+              };
+            }
+            return book;
+          });
+        }
       })
       .addCase(borrowBookThunk.rejected, (state) => {
         state.status = 'rejected';
@@ -144,6 +163,25 @@ const booksSlice = createSlice({
         state.list.push(action.payload);
       })
       .addCase(addBookThunk.rejected, (state) => {
+        state.status = 'rejected';
+      })
+      .addCase(updateBookThunk.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateBookThunk.fulfilled, (state, action) => {
+        state.status = 'received';
+        const updatedBook = action.payload;
+        const bookId = updatedBook.id;
+        state.list = state.list.map((book) => {
+          if (book.id === bookId) {
+            return {
+              ...updatedBook,
+            };
+          }
+          return book;
+        });
+      })
+      .addCase(updateBookThunk.rejected, (state) => {
         state.status = 'rejected';
       })
       .addCase(deleteBookThunk.pending, (state) => {

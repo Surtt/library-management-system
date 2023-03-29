@@ -1,16 +1,8 @@
-import React from 'react';
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Dialog,
-  DialogActions,
-  DialogTitle,
-  Typography,
-} from '@mui/material';
+import React, { useState } from 'react';
+import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 
+import Dialog from '@/components/dialog';
+import EditBookForm from '@/components/forms/edit-book-form';
 import { deleteBookThunk, returnBookThunk } from '@/features/books/booksSlice';
 import { userReturnBookThunk } from '@/features/users/usersSlice';
 import { useAppDispatch } from '@/hooks';
@@ -21,7 +13,16 @@ const VisitorsBook = ({ ISBN, title, image, status }: IBook) => {
   const dispatch = useAppDispatch();
   const { books, users } = useAppSelector((state) => state);
   const currentBook = books.list.find((book) => book.ISBN === ISBN) as IBook;
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [openForm, setOpenForm] = useState(false);
+
+  const handleClickOpenForm = () => {
+    setOpenForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setOpenForm(false);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,8 +39,7 @@ const VisitorsBook = ({ ISBN, title, image, status }: IBook) => {
   };
   const handleEditBook = () => {
     if (currentBook) {
-      dispatch(returnBookThunk(currentBook.id));
-      dispatch(userReturnBookThunk(currentBook.id));
+      handleClickOpenForm();
     }
   };
   const handleDeleteBook = () => {
@@ -61,25 +61,16 @@ const VisitorsBook = ({ ISBN, title, image, status }: IBook) => {
             <Button onClick={handleEditBook} variant="outlined" color="inherit" fullWidth>
               Edit
             </Button>
+            <EditBookForm currentBook={currentBook} open={openForm} handleClose={handleCloseForm} />
             <Button onClick={handleClickOpen} variant="outlined" color="inherit" fullWidth>
               Delete
             </Button>
             <Dialog
+              title={title}
               open={open}
-              onClose={handleClose}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle id="alert-dialog-title">
-                {`Do you really want to delete the book "${title}"?`}
-              </DialogTitle>
-              <DialogActions>
-                <Button onClick={handleDeleteBook}>Delete</Button>
-                <Button onClick={handleClose} autoFocus>
-                  Cancel
-                </Button>
-              </DialogActions>
-            </Dialog>
+              handleClose={handleClose}
+              handleDeleteBook={handleDeleteBook}
+            />
           </>
         ) : (
           <Button onClick={handleReturnBook} variant="outlined" color="inherit" fullWidth>

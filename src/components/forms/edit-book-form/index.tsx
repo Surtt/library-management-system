@@ -8,18 +8,19 @@ import {
   InputLabel,
   ListItemText,
   MenuItem,
+  Modal,
   Select,
   SelectChangeEvent,
   TextField,
+  useTheme,
 } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
-import { addBookThunk } from '@/features/books/booksSlice';
+import { updateBookThunk } from '@/features/books/booksSlice';
 import { useAppDispatch } from '@/hooks';
 import { useAppSelector } from '@/hooks/useAppSelector';
-import { TAddBook } from '@/types';
+import { IBook } from '@/types';
 
 const validationSchema = z.object({
   ISBN: z.string().length(11, { message: 'ISBN must be 11 characters long' }),
@@ -43,17 +44,30 @@ const MenuProps = {
   },
 };
 
-const AddBookPage = () => {
+type FormBookProps = {
+  currentBook: IBook;
+  open: boolean;
+  handleClose: () => void;
+};
+
+const EditBookForm = ({ currentBook, open, handleClose }: FormBookProps) => {
+  const theme = useTheme();
   const dispatch = useAppDispatch();
   const { authors, categories } = useAppSelector((state) => state);
-  const navigate = useNavigate();
-  const [book, setBook] = useState<TAddBook>({
-    ISBN: '',
-    title: '',
-    description: '',
-    publisher: '',
-    authors: '',
-    categories: [],
+  const [book, setBook] = useState<IBook>({
+    borrowDate: currentBook.borrowDate,
+    borrowerId: currentBook.borrowerId,
+    id: currentBook.id,
+    image: currentBook.image,
+    publishedDate: currentBook.publishedDate,
+    returnDate: currentBook.returnDate,
+    status: currentBook.status,
+    ISBN: currentBook.ISBN,
+    title: currentBook.title,
+    description: currentBook.description,
+    publisher: currentBook.publisher,
+    authors: currentBook.authors,
+    categories: currentBook.categories,
   });
 
   const {
@@ -65,8 +79,8 @@ const AddBookPage = () => {
   });
 
   const onSubmit: SubmitHandler<ValidationSchema> = () => {
-    dispatch(addBookThunk({ ...book }));
-    navigate('/');
+    dispatch(updateBookThunk({ ...book }));
+    handleClose();
   };
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -93,27 +107,34 @@ const AddBookPage = () => {
     });
   };
 
-  // const handleSubmitForm = (e: FormEvent<HTMLFormElement>, book: TAddBook) => {
-  //   e.preventDefault();
-  //   dispatch(addBook({ ...book }));
-  //   navigate('/');
-  // };
-  const handleBack = () => {
-    navigate(-1);
-  };
   return (
-    <Box component="section">
-      <Button onClick={handleBack} sx={{ marginBottom: 4 }}>
-        Back
-      </Button>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
       <Box
         onSubmit={handleSubmit(onSubmit)}
         component="form"
-        sx={{ display: 'flex', flexDirection: 'column', rowGap: 2, width: '50%', margin: 'auto' }}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          rowGap: 2,
+          width: '50%',
+          margin: 'auto',
+          padding: 4,
+          backgroundColor: theme.palette.common.white,
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
         autoComplete="off"
       >
         <TextField
           {...register('ISBN')}
+          value={book.ISBN}
           onChange={handleInput}
           id="ISBN"
           label="ISBN"
@@ -122,6 +143,7 @@ const AddBookPage = () => {
         {errors.ISBN && errors.ISBN.message}
         <TextField
           {...register('title')}
+          value={book.title}
           onChange={handleInput}
           id="title"
           label="title"
@@ -130,6 +152,7 @@ const AddBookPage = () => {
         {errors.title && errors.title.message}
         <TextField
           {...register('description')}
+          value={book.description}
           onChange={handleInput}
           id="description"
           label="description"
@@ -138,6 +161,7 @@ const AddBookPage = () => {
         {errors.description && errors.description.message}
         <TextField
           {...register('publisher')}
+          value={book.publisher}
           onChange={handleInput}
           id="publisher"
           label="publisher"
@@ -190,12 +214,13 @@ const AddBookPage = () => {
           </Select>
         </FormControl>
         {errors.categories && errors.categories.message}
+
         <Button type="submit" variant="contained" size="large">
-          Add a book
+          Edit a book
         </Button>
       </Box>
-    </Box>
+    </Modal>
   );
 };
 
-export default AddBookPage;
+export default EditBookForm;

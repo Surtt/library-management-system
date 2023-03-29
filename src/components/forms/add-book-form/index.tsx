@@ -8,12 +8,13 @@ import {
   InputLabel,
   ListItemText,
   MenuItem,
+  Modal,
   Select,
   SelectChangeEvent,
   TextField,
+  useTheme,
 } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 import { addBookThunk } from '@/features/books/booksSlice';
@@ -43,10 +44,15 @@ const MenuProps = {
   },
 };
 
-const AddBookPage = () => {
+type FormBookProps = {
+  open: boolean;
+  handleClose: () => void;
+};
+
+const AddBookForm = ({ open, handleClose }: FormBookProps) => {
+  const theme = useTheme();
   const dispatch = useAppDispatch();
   const { authors, categories } = useAppSelector((state) => state);
-  const navigate = useNavigate();
   const [book, setBook] = useState<TAddBook>({
     ISBN: '',
     title: '',
@@ -66,7 +72,16 @@ const AddBookPage = () => {
 
   const onSubmit: SubmitHandler<ValidationSchema> = () => {
     dispatch(addBookThunk({ ...book }));
-    navigate('/');
+    handleClose();
+    setBook((prevState) => ({
+      ...prevState,
+      ISBN: '',
+      title: '',
+      description: '',
+      publisher: '',
+      authors: '',
+      categories: [],
+    }));
   };
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -93,23 +108,29 @@ const AddBookPage = () => {
     });
   };
 
-  // const handleSubmitForm = (e: FormEvent<HTMLFormElement>, book: TAddBook) => {
-  //   e.preventDefault();
-  //   dispatch(addBook({ ...book }));
-  //   navigate('/');
-  // };
-  const handleBack = () => {
-    navigate(-1);
-  };
   return (
-    <Box component="section">
-      <Button onClick={handleBack} sx={{ marginBottom: 4 }}>
-        Back
-      </Button>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
       <Box
         onSubmit={handleSubmit(onSubmit)}
         component="form"
-        sx={{ display: 'flex', flexDirection: 'column', rowGap: 2, width: '50%', margin: 'auto' }}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          rowGap: 2,
+          width: '50%',
+          margin: 'auto',
+          padding: 4,
+          backgroundColor: theme.palette.common.white,
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
         autoComplete="off"
       >
         <TextField
@@ -190,12 +211,13 @@ const AddBookPage = () => {
           </Select>
         </FormControl>
         {errors.categories && errors.categories.message}
+
         <Button type="submit" variant="contained" size="large">
           Add a book
         </Button>
       </Box>
-    </Box>
+    </Modal>
   );
 };
 
-export default AddBookPage;
+export default AddBookForm;
