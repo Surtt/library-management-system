@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 
 import { Extra, IAuthor, Status } from '@/types';
 
@@ -45,6 +45,16 @@ export const getAuthorsThunk = createAsyncThunk<
   },
 );
 
+export const addAuthorThunk = createAsyncThunk(
+  'authors/addAuthor',
+  async (name: IAuthor['name']) => {
+    return {
+      id: nanoid(),
+      name,
+    };
+  },
+);
+
 const authorsSlice = createSlice({
   name: 'authors',
   initialState,
@@ -59,6 +69,16 @@ const authorsSlice = createSlice({
         state.list = action.payload.data;
       })
       .addCase(getAuthorsThunk.rejected, (state) => {
+        state.status = 'rejected';
+      })
+      .addCase(addAuthorThunk.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addAuthorThunk.fulfilled, (state, action) => {
+        state.status = 'received';
+        state.list = [action.payload, ...state.list];
+      })
+      .addCase(addAuthorThunk.rejected, (state) => {
         state.status = 'rejected';
       });
   },

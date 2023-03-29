@@ -10,7 +10,7 @@
   "publishedDate": "18.12.2022",
   "borrowDate": null,
   "returnDate": null,
-  "image": "./images/book-1.jpg",
+  "image": "/public/images/book-1.jpg",
   "categories": ["1"]
 }, {
   "id": "7c2da18f-3492-4ee5-9a14-a5ad5d7a88ae",
@@ -24,7 +24,7 @@
   "publishedDate": "25.11.2022",
   "borrowDate": "08.04.2022",
   "returnDate": "08.02.2023",
-  "image": "./images/book-2.jpg",
+  "image": "/public/images/book-2.jpg",
   "categories": ["1"]
 }, {
   "id": "b84b1ca2-2bba-4d82-b39d-c46a37db0acd",
@@ -38,7 +38,7 @@
   "publishedDate": "09.11.2022",
   "borrowDate": "29.07.2022",
   "returnDate": "26.10.2022",
-  "image": "./images/book-3.jpg",
+  "image": "/public/images/book-3.jpg",
   "categories": ["1"]
 }, {
   "id": "e1fd3b6f-4fb0-45d0-bbfd-f347761b790d",
@@ -52,7 +52,7 @@
   "publishedDate": "22.04.2022",
   "borrowDate": "25.11.2022",
   "returnDate": "26.02.2023",
-  "image": "./images/book-4.jpg",
+  "image": "/public/images/book-4.jpg",
   "categories": ["1"]
 }, {
   "id": "8100bf34-0c4a-4ad9-a4a0-ac3b4570a585",
@@ -66,7 +66,7 @@
   "publishedDate": "03.10.2022",
   "borrowDate": "18.01.2023",
   "returnDate": "05.11.2022",
-  "image": "./images/book-5.jpg",
+  "image": "/public/images/book-5.jpg",
   "categories": ["1"]
 }, {
   "id": "b453e8df-98c1-45a1-860a-2f40b0f00e48",
@@ -80,7 +80,7 @@
   "publishedDate": "14.11.2022",
   "borrowDate": "02.04.2022",
   "returnDate": "16.10.2022",
-  "image": "./images/book-6.jpg",
+  "image": "/public/images/book-6.jpg",
   "categories": ["1"]
 }, {
   "id": "01b8b35e-84c5-4cb5-8894-0e11563a9e01",
@@ -94,7 +94,7 @@
   "publishedDate": "06.03.2022",
   "borrowDate": "14.12.2022",
   "returnDate": "07.05.2022",
-  "image": "./images/book-7.jpg",
+  "image": "/public/images/book-7.jpg",
   "categories": ["2"]
 }, {
   "id": "07ef08d3-d814-4a6a-abc4-d52cdfdf63c9",
@@ -108,7 +108,7 @@
   "publishedDate": "11.10.2022",
   "borrowDate": "22.04.2022",
   "returnDate": "03.12.2022",
-  "image": "./images/book-8.jpg",
+  "image": "/public/images/book-8.jpg",
   "categories": ["2"]
 }, {
   "id": "ec95c173-6a53-493d-b60a-6b26372bdf79",
@@ -122,7 +122,7 @@
   "publishedDate": "15.07.2022",
   "borrowDate": "12.04.2022",
   "returnDate": "10.08.2022",
-  "image": "./images/book-9.jpg",
+  "image": "/public/images/book-9.jpg",
   "categories": ["2"]
 }, {
   "id": "905af715-f64e-436a-abe1-e2f3ed472fe3",
@@ -136,7 +136,7 @@
   "publishedDate": "23.03.2022",
   "borrowDate": "04.06.2022",
   "returnDate": "02.09.2022",
-  "image": "./images/book-10.jpg",
+  "image": "/public/images/book-10.jpg",
   "categories": ["2"]
 }, {
   "id": "3e0dd4ab-1ee5-4dac-bb61-095415199be7",
@@ -150,7 +150,7 @@
   "publishedDate": "28.08.2022",
   "borrowDate": "28.12.2022",
   "returnDate": "05.08.2022",
-  "image": "./images/book-11.jpg",
+  "image": "/public/images/book-11.jpg",
   "categories": ["2"]
 }, {
   "id": "5351287f-8629-48aa-af93-a95c7a2a4de6",
@@ -164,7 +164,7 @@
   "publishedDate": "16.02.2023",
   "borrowDate": "26.06.2022",
   "returnDate": "12.08.2022",
-  "image": "./images/book-12.jpg",
+  "image": "/public/images/book-12.jpg",
   "categories": ["2"]
 },
   {
@@ -179,7 +179,7 @@
     "publishedDate": "16.02.2023",
     "borrowDate": "26.06.2022",
     "returnDate": "12.08.2022",
-    "image": "./images/book-13.jpg",
+    "image": "/public/images/book-13.jpg",
     "categories": ["2"]
   }
 ]
