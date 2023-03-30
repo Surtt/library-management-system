@@ -55,6 +55,17 @@ export const addAuthorThunk = createAsyncThunk(
   },
 );
 
+export const deleteAuthorThunk = createAsyncThunk('authors/deleteAuthor', async (id: string) => {
+  return id;
+});
+
+export const updateAuthorThunk = createAsyncThunk(
+  'authors/updateAuthor',
+  async (author: IAuthor) => {
+    return author;
+  },
+);
+
 const authorsSlice = createSlice({
   name: 'authors',
   initialState,
@@ -79,6 +90,35 @@ const authorsSlice = createSlice({
         state.list = [action.payload, ...state.list];
       })
       .addCase(addAuthorThunk.rejected, (state) => {
+        state.status = 'rejected';
+      })
+      .addCase(deleteAuthorThunk.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteAuthorThunk.fulfilled, (state, action) => {
+        state.status = 'received';
+        state.list = state.list.filter(({ id }) => id !== action.payload);
+      })
+      .addCase(deleteAuthorThunk.rejected, (state) => {
+        state.status = 'rejected';
+      })
+      .addCase(updateAuthorThunk.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateAuthorThunk.fulfilled, (state, action) => {
+        state.status = 'received';
+        const updatedAuthor = action.payload;
+        const authorId = updatedAuthor.id;
+        state.list = state.list.map((author) => {
+          if (author.id === authorId) {
+            return {
+              ...updatedAuthor,
+            };
+          }
+          return author;
+        });
+      })
+      .addCase(updateAuthorThunk.rejected, (state) => {
         state.status = 'rejected';
       });
   },
