@@ -21,17 +21,9 @@ import { updateBookThunk } from '@/features/books/booksSlice';
 import { useAppDispatch } from '@/hooks';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { IBook } from '@/types';
+import { validationBookSchema } from '@/utils';
 
-const validationSchema = z.object({
-  ISBN: z.string().length(11, { message: 'ISBN must be 11 characters long' }),
-  title: z.string().min(1, { message: 'Title is required' }),
-  description: z.string().min(1, { message: 'Description is required' }),
-  publisher: z.string().min(1, { message: 'Publisher is required' }),
-  authors: z.string().min(1, { message: 'Authors is required' }),
-  categories: z.string().array().min(1, { message: 'Categories is required' }),
-});
-
-type ValidationSchema = z.infer<typeof validationSchema>;
+type ValidationSchema = z.infer<typeof validationBookSchema>;
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -75,7 +67,7 @@ const EditBookForm = ({ currentBook, open, handleClose }: FormBookProps) => {
     handleSubmit,
     formState: { errors },
   } = useForm<ValidationSchema>({
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(validationBookSchema),
   });
 
   const onSubmit: SubmitHandler<ValidationSchema> = () => {

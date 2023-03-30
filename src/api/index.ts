@@ -7,7 +7,6 @@ export const CATEGORIES = `${BASE_URL}categories.json`;
 
 export const api = axios.create({
   baseURL: BASE_URL,
-  // withCredentials: true,
 });
 
 api.defaults.headers.common['Content-Type'] = 'application/json';

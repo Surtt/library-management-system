@@ -10,6 +10,7 @@ import {
   MenuItem,
   Tooltip,
   Typography,
+  useTheme,
 } from '@mui/material';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
@@ -20,6 +21,7 @@ import { useAppDispatch } from '@/hooks';
 import { useAppSelector } from '@/hooks/useAppSelector';
 
 const Navigation = () => {
+  const theme = useTheme();
   const dispatch = useAppDispatch();
   const { users } = useAppSelector((state) => state);
   const stateContext = useStateContext();
@@ -49,9 +51,15 @@ const Navigation = () => {
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 2 }}>
-        <Typography sx={{ fontWeight: 700 }}>My Books</Typography>
+        <Link to="/profile">
+          <Typography color={theme.palette.grey['800']} sx={{ fontWeight: 700 }}>
+            My Books
+          </Typography>
+        </Link>
         <Link to="/login">
-          <Typography sx={{ fontWeight: 700 }}>{!users?.user && 'Log In'}</Typography>
+          <Typography color={theme.palette.grey['800']} sx={{ fontWeight: 700 }}>
+            {!users?.user && 'Log In'}
+          </Typography>
         </Link>
         {users.user && (
           <Tooltip title="Account settings">

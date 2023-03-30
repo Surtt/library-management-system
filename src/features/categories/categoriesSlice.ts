@@ -21,7 +21,7 @@ export const getCategoriesThunk = createAsyncThunk<
     rejectValue: string;
   }
 >(
-  'categories/getCategories',
+  'categories/get-categories',
   async (_, { extra: { client, api }, rejectWithValue }) => {
     try {
       return client.get(api.CATEGORIES);

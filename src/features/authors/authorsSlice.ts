@@ -5,11 +5,13 @@ import { Extra, IAuthor, Status } from '@/types';
 type AuthorsSlice = {
   status: Status;
   list: IAuthor[];
+  error: string | null;
 };
 
 const initialState: AuthorsSlice = {
   status: 'idle',
   list: [],
+  error: null,
 };
 
 export const getAuthorsThunk = createAsyncThunk<
@@ -21,7 +23,7 @@ export const getAuthorsThunk = createAsyncThunk<
     rejectValue: string;
   }
 >(
-  'authors/getAuthors',
+  'authors/get-authors',
   async (_, { extra: { client, api }, rejectWithValue }) => {
     try {
       return client.get(api.AUTHORS);
@@ -46,7 +48,7 @@ export const getAuthorsThunk = createAsyncThunk<
 );
 
 export const addAuthorThunk = createAsyncThunk(
-  'authors/addAuthor',
+  'authors/add-author',
   async (name: IAuthor['name']) => {
     return {
       id: nanoid(),
@@ -55,12 +57,12 @@ export const addAuthorThunk = createAsyncThunk(
   },
 );
 
-export const deleteAuthorThunk = createAsyncThunk('authors/deleteAuthor', async (id: string) => {
+export const deleteAuthorThunk = createAsyncThunk('authors/delete-author', async (id: string) => {
   return id;
 });
 
 export const updateAuthorThunk = createAsyncThunk(
-  'authors/updateAuthor',
+  'authors/update-author',
   async (author: IAuthor) => {
     return author;
   },
@@ -74,6 +76,7 @@ const authorsSlice = createSlice({
     builder
       .addCase(getAuthorsThunk.pending, (state) => {
         state.status = 'loading';
+        state.error = null;
       })
       .addCase(getAuthorsThunk.fulfilled, (state, action) => {
         state.status = 'received';
@@ -81,6 +84,7 @@ const authorsSlice = createSlice({
       })
       .addCase(getAuthorsThunk.rejected, (state) => {
         state.status = 'rejected';
+        state.error = 'Cannot load data';
       })
       .addCase(addAuthorThunk.pending, (state) => {
         state.status = 'loading';

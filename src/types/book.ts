@@ -21,7 +21,6 @@ export interface IBook {
 export interface IBookFilter {
   available: boolean;
   author: string;
-  publishedDate: string;
 }
 
 export type TAddBook = Omit<

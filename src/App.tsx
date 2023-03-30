@@ -8,6 +8,7 @@ import BooksPage from '@/pages/books.page';
 import DashboardPage from '@/pages/dashboard.page';
 import HomePage from '@/pages/home.page';
 import LoginPage from '@/pages/login.page';
+import NoMatchPage from '@/pages/no-match.page';
 import ProfilePage from '@/pages/profile.page';
 
 import './App.css';
@@ -24,8 +25,7 @@ const App = () => {
             <Route path="books" element={<BooksPage />} />
             <Route path="authors" element={<AuthorsPage />} />
           </Route>
-
-          {/*<Route path="*" element={<NoMatch />} />*/}
+          <Route path="*" element={<NoMatchPage />} />
         </Route>
       </Routes>
     </CssVarsProvider>

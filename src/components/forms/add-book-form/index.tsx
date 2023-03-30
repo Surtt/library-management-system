@@ -15,23 +15,13 @@ import {
   useTheme,
 } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { addBookThunk } from '@/features/books/booksSlice';
 import { useAppDispatch } from '@/hooks';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { TAddBook } from '@/types';
-
-const validationSchema = z.object({
-  ISBN: z.string().length(11, { message: 'ISBN must be 11 characters long' }),
-  title: z.string().min(1, { message: 'Title is required' }),
-  description: z.string().min(1, { message: 'Description is required' }),
-  publisher: z.string().min(1, { message: 'Publisher is required' }),
-  authors: z.string().min(1, { message: 'Authors is required' }),
-  categories: z.string().array().min(1, { message: 'Categories is required' }),
-});
-
-type ValidationSchema = z.infer<typeof validationSchema>;
+import { TValidationBookSchema } from '@/types/validation.schema';
+import { validationBookSchema } from '@/utils';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -66,11 +56,11 @@ const AddBookForm = ({ open, handleClose }: FormBookProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ValidationSchema>({
-    resolver: zodResolver(validationSchema),
+  } = useForm<TValidationBookSchema>({
+    resolver: zodResolver(validationBookSchema),
   });
 
-  const onSubmit: SubmitHandler<ValidationSchema> = () => {
+  const onSubmit: SubmitHandler<TValidationBookSchema> = () => {
     dispatch(addBookThunk({ ...book }));
     handleClose();
     setBook((prevState) => ({

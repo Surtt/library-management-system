@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import {
   Box,
   Checkbox,
@@ -10,28 +10,36 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 
-import { IAuthor, IBookFilter } from '@/types';
+import { setFilterAction } from '@/features/filters/filtersSlice';
+import { useAppDispatch } from '@/hooks';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { IBookFilter } from '@/types';
 
-type TFilter = {
-  filters: IBookFilter;
-  setFilter: Dispatch<SetStateAction<IBookFilter>>;
-  authors: IAuthor[];
-};
-
-const Filter = ({ filters, setFilter, authors }: TFilter) => {
+const Filter = () => {
+  const dispatch = useAppDispatch();
+  const { authors } = useAppSelector((state) => state);
+  const [filters, setFilters] = useState<IBookFilter>({
+    available: false,
+    author: '',
+  });
   const handleChangeAvailable = (event: ChangeEvent<HTMLInputElement>) => {
-    setFilter({
-      ...filters,
+    setFilters((prev) => ({
+      ...prev,
       [event.target.name]: event.target.checked,
-    });
+    }));
   };
 
   const handleChangeSelect = (event: SelectChangeEvent) => {
-    setFilter({
+    setFilters({
       ...filters,
       author: event.target.value,
     });
   };
+
+  useEffect(() => {
+    dispatch(setFilterAction(filters));
+  }, [filters, dispatch]);
+
   return (
     <Box
       component="section"
@@ -65,7 +73,7 @@ const Filter = ({ filters, setFilter, authors }: TFilter) => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {authors.map(({ id, name }) => (
+          {authors.list.map(({ id, name }) => (
             <MenuItem key={id} value={id}>
               {name}
             </MenuItem>

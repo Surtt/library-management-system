@@ -2,24 +2,19 @@ import React, { ChangeEvent, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Modal, TextField, useTheme } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { addAuthorThunk } from '@/features/authors/authorsSlice';
 import { useAppDispatch } from '@/hooks';
 import { IAuthor } from '@/types';
+import { TValidationAuthorSchema } from '@/types/validation.schema';
+import { validationAuthorSchema } from '@/utils/author.validation';
 
-const validationSchema = z.object({
-  name: z.string().min(1, { message: 'Name is required' }),
-});
-
-type ValidationSchema = z.infer<typeof validationSchema>;
-
-type FormBookProps = {
+type FormAuthorProps = {
   open: boolean;
   handleClose: () => void;
 };
 
-const AddAuthorForm = ({ open, handleClose }: FormBookProps) => {
+const AddAuthorForm = ({ open, handleClose }: FormAuthorProps) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const [author, setAuthor] = useState<Omit<IAuthor, 'id'>>({
@@ -30,11 +25,11 @@ const AddAuthorForm = ({ open, handleClose }: FormBookProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ValidationSchema>({
-    resolver: zodResolver(validationSchema),
+  } = useForm<TValidationAuthorSchema>({
+    resolver: zodResolver(validationAuthorSchema),
   });
 
-  const onSubmit: SubmitHandler<ValidationSchema> = () => {
+  const onSubmit: SubmitHandler<TValidationAuthorSchema> = () => {
     dispatch(addAuthorThunk(author.name));
     handleClose();
     setAuthor((prevState) => ({

@@ -5,6 +5,7 @@ import * as api from '@/api';
 import { authorsReducer } from '@/features/authors/authorsSlice';
 import { booksReducer } from '@/features/books/booksSlice';
 import { categoriesReducer } from '@/features/categories/categoriesSlice';
+import { filtersReducer } from '@/features/filters/filtersSlice';
 import { usersReducer } from '@/features/users/usersSlice';
 
 export const store = configureStore({
@@ -13,9 +14,10 @@ export const store = configureStore({
     books: booksReducer,
     authors: authorsReducer,
     categories: categoriesReducer,
+    filters: filtersReducer,
   },
-  middleware: (getDefaultMiddlware) =>
-    getDefaultMiddlware({
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
       thunk: {
         extraArgument: {
           client: axios,

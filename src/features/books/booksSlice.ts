@@ -5,13 +5,11 @@ import { Extra, IBook, IUser, Status, TAddBook, TStatus } from '@/types';
 
 type BooksState = {
   status: Status;
-  // error: string | null;
   list: IBook[];
 };
 
 const initialState: BooksState = {
   status: 'idle',
-  // error: null,
   list: [],
 };
 

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import VisitorsBook from '@/components/books/visitors-book';
+import ButtonBack from '@/components/button-back';
 import { useAppSelector } from '@/hooks/useAppSelector';
 
 const ProfilePage = () => {
@@ -20,7 +21,7 @@ const ProfilePage = () => {
 
   return (
     <Box component="section">
-      <Button onClick={() => navigate(-1)}>Back</Button>
+      <ButtonBack />
       <Box component="h3">Borrowed books</Box>
       <Box sx={{ display: 'flex', columnGap: 4 }}>
         {borrowedBooks?.map((book) => (

@@ -8,6 +8,7 @@ import { userReturnBookThunk } from '@/features/users/usersSlice';
 import { useAppDispatch } from '@/hooks';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { IBook } from '@/types';
+import { Role } from '@/types/role';
 
 const VisitorsBook = ({ ISBN, title, image, status }: IBook) => {
   const dispatch = useAppDispatch();
@@ -56,7 +57,7 @@ const VisitorsBook = ({ ISBN, title, image, status }: IBook) => {
         </Typography>
       </CardContent>
       <CardActions sx={{ marginTop: 'auto' }}>
-        {users.user?.role === 'admin' ? (
+        {users.user?.role === Role.ADMIN ? (
           <>
             <Button onClick={handleEditBook} variant="outlined" color="inherit" fullWidth>
               Edit
