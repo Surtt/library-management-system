@@ -37,9 +37,9 @@ const Book = ({ ISBN, title, image, status }: IBook) => {
           variant="outlined"
           color="inherit"
           fullWidth
-          disabled={status !== 'available'}
+          disabled={!status}
         >
-          {status === 'available' ? 'Borrow' : 'Not available'}
+          {status ? 'Borrow' : 'Not available'}
         </Button>
       </CardActions>
     </Card>

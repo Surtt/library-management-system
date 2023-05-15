@@ -28,7 +28,7 @@ html, body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  background-color: wheat;
+  background-color: var(--mui-palette-common-white);
 }
 
 img, picture, video, canvas, svg {
@@ -46,6 +46,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
 ul {
   list-style: none;
+  padding: 0;
 }
 
 body {

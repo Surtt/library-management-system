@@ -9,23 +9,31 @@ import {
   Menu,
   MenuItem,
   Tooltip,
-  Typography,
-  useTheme,
 } from '@mui/material';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 
+import CustomMenuItem from '@/components/custom-menu-item';
 import { useStateContext } from '@/context';
 import { logoutUser } from '@/features/users/usersSlice';
 import { useAppDispatch } from '@/hooks';
-import { useAppSelector } from '@/hooks/useAppSelector';
+
+const menuData = [
+  {
+    name: 'Sign in',
+    to: '/signin',
+  },
+  {
+    name: 'Sign up',
+    to: '/signup',
+  },
+];
 
 const Navigation = () => {
-  const theme = useTheme();
+  const user = useStateContext().state.authUser;
   const dispatch = useAppDispatch();
-  const { users } = useAppSelector((state) => state);
   const stateContext = useStateContext();
-  const nameAvatar = typeof users.user?.firstName === 'string' && users.user.firstName.slice(0, 1);
+  const nameAvatar = typeof user?.firstName === 'string' && user.firstName.slice(0, 1);
   const [, , removeCookie] = useCookies(['logged_in']);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -51,17 +59,19 @@ const Navigation = () => {
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 2 }}>
-        <Link to="/profile">
-          <Typography color={theme.palette.grey['800']} sx={{ fontWeight: 700 }}>
-            My Books
-          </Typography>
-        </Link>
-        <Link to="/login">
-          <Typography color={theme.palette.grey['800']} sx={{ fontWeight: 700 }}>
-            {!users?.user && 'Log In'}
-          </Typography>
-        </Link>
-        {users.user && (
+        {user && (
+          <Box component="ul" sx={{ display: 'flex', columnGap: 5 }}>
+            <CustomMenuItem name="My Books" to="/profile" />
+          </Box>
+        )}
+        {!user && (
+          <Box component="ul" sx={{ display: 'flex', columnGap: 5 }}>
+            {menuData.map((menuItem) => (
+              <CustomMenuItem key={menuItem.name} {...menuItem} />
+            ))}
+          </Box>
+        )}
+        {user && (
           <Tooltip title="Account settings">
             <IconButton
               onClick={handleClick}
@@ -110,7 +120,7 @@ const Navigation = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        {users.user?.role === 'admin' ? (
+        {user?.roles?.find((r) => r.name === 'ROLE_ADMIN') ? (
           <Link to="/dashboard">
             <MenuItem onClick={handleClose}>
               <Avatar /> Dashboard

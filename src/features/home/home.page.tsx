@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 
-import Books from '@/components/books';
-import Filter from '@/components/filter';
 import { getAuthorsThunk } from '@/features/authors/authorsSlice';
 import { getCategoriesThunk } from '@/features/categories/categoriesSlice';
+import Advantages from '@/features/home/advantages';
+import HeaderBanner from '@/features/home/header-banner';
+import Languages from '@/features/home/languages';
+import Statistics from '@/features/home/statistics';
 import { useAppDispatch } from '@/hooks';
 
 const HomePage = () => {
@@ -16,8 +18,12 @@ const HomePage = () => {
 
   return (
     <>
-      <Filter />
-      <Books />
+      {/*<Filter />*/}
+      {/*<Books />*/}
+      <HeaderBanner />
+      <Statistics />
+      <Advantages />
+      <Languages />
     </>
   );
 };

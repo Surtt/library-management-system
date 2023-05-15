@@ -1,4 +1,4 @@
-import { getBooks } from '@/api/booksApi';
+import { getBooks } from '@/features/books/booksApi';
 import useData from '@/queries/hooks/useData';
 import { IBook, IBookFilter } from '@/types';
 import { setFilter } from '@/utils';

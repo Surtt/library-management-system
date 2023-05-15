@@ -1,13 +1,13 @@
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
+import { toast, ToastContent } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-const querySuccessHandler = (): void => {
-  toast.success('Success', { position: 'top-right' });
+export const querySuccessHandler = (message: ToastContent): void => {
+  toast.success(message, { position: 'top-right' });
 };
 
-const queryErrorHandler = (error: unknown): void => {
+export const queryErrorHandler = (error: unknown): void => {
   const title = error instanceof Error ? error.message : 'error connecting to server';
   toast.error(title, { position: 'top-right' });
 };
@@ -23,11 +23,11 @@ export const queryClient = new QueryClient({
     },
   },
   queryCache: new QueryCache({
-    onSuccess: querySuccessHandler,
+    // onSuccess: querySuccessHandler,
     onError: queryErrorHandler,
   }),
   mutationCache: new MutationCache({
-    onSuccess: querySuccessHandler,
+    onSuccess: (message) => querySuccessHandler(message as ToastContent),
     onError: queryErrorHandler,
   }),
 });

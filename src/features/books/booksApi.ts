@@ -1,8 +1,7 @@
+import { api } from '@/api';
 import { IBook } from '@/types';
 
-import { api } from './';
-
 export const getBooks = async () => {
-  const { data } = await api.get<IBook[]>('books.json');
+  const { data } = await api.get<IBook[]>('/books');
   return data;
 };
