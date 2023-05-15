@@ -1,23 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 
 import VisitorsBook from '@/components/books/visitors-book';
 import ButtonBack from '@/components/button-back';
-import { useAppSelector } from '@/hooks/useAppSelector';
 
 const ProfilePage = () => {
-  const navigate = useNavigate();
-  const { books, users } = useAppSelector((state) => state);
-  const borrowedBooks =
-    users.user?.booksIds &&
-    users?.user?.booksIds.flatMap((id) => books.list.filter((book) => book.id === id));
+  // const { books, users } = useAppSelector((state) => state);
+  // const borrowedBooks =
+  //   users.user?.booksIds &&
+  //   users?.user?.booksIds.flatMap((id) => books.list.filter((book) => book.id === id));
 
-  useEffect(() => {
-    if (!users.user) {
-      return navigate('/login');
-    }
-  });
+  // useEffect(() => {
+  //   if (!user) {
+  //     return navigate('/signin');
+  //   }
+  // });
 
   return (
     <Box component="section">

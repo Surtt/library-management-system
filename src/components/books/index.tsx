@@ -3,16 +3,16 @@ import { Box } from '@mui/material';
 
 import { getBooksThunk } from '@/features/books/booksSlice';
 import { useAppDispatch } from '@/hooks';
-import { useAppSelector } from '@/hooks/useAppSelector';
-import { setFilter } from '@/utils';
+import { useBooks } from '@/queries/useBooks';
 
 import Book from './book';
 
 const Books = () => {
+  const [books] = useBooks({});
   const dispatch = useAppDispatch();
-  const { books, filters } = useAppSelector((state) => state);
+  // const { books, filters } = useAppSelector((state) => state);
 
-  const shouldRender = () => setFilter(books.list, filters.filter);
+  // const shouldRender = () => setFilter(books.list, filters.filter);
 
   useEffect(() => {
     dispatch(getBooksThunk());
@@ -31,7 +31,7 @@ const Books = () => {
           marginTop: 5,
         }}
       >
-        {shouldRender()?.map((book) => (
+        {books.map((book) => (
           <Book key={book.id} {...book} />
         ))}
       </Box>
