@@ -1,4 +1,4 @@
-import { getCategories } from '@/api/categoriesApi';
+import { getCategories } from '@/features/categories/categoriesApi';
 import { queryKeys } from '@/queries/constants';
 import useData from '@/queries/hooks/useData';
 import { ICategory } from '@/types';

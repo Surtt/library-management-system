@@ -22,7 +22,12 @@ const menuData = [
 const HeaderMainNav = () => {
   const theme = useTheme();
   return (
-    <Box sx={{ borderTop: `1px solid ${theme.palette.grey.A400}` }}>
+    <Box
+      sx={{
+        borderTop: `1px solid ${theme.palette.grey.A400}`,
+        borderBottom: `1px solid ${theme.palette.grey.A400}`,
+      }}
+    >
       <Container
         maxWidth="xl"
         sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}

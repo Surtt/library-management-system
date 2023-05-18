@@ -19,7 +19,7 @@ const HomePage = () => {
   return (
     <>
       {/*<Filter />*/}
-      {/*<Books />*/}
+
       <HeaderBanner />
       <Statistics />
       <Advantages />

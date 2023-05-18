@@ -1,8 +1,12 @@
 import { FC, lazy, Suspense } from 'react';
 import type { RouteObject } from 'react-router-dom';
 
+import AdminLayout from '@/components/admin-layout';
+import MainLayout from '@/components/main-layout';
 import LoginPage from '@/features/auth/signin/signIn.page';
+import BooksPage from '@/features/books/books.page';
 import HomePage from '@/features/home/home.page';
+import BooksAdminPage from '@/pages/books.admin.page';
 import DashboardPage from '@/pages/dashboard.page';
 
 import FullScreenLoader from '../components/full-screen-loader';
@@ -26,6 +30,10 @@ const authRoutes: RouteObject = {
   element: <Layout />,
   children: [
     {
+      index: true,
+      element: <HomePage />,
+    },
+    {
       path: 'signin',
       element: <LoginPage />,
     },
@@ -38,11 +46,17 @@ const authRoutes: RouteObject = {
 
 const normalRoutes: RouteObject = {
   path: '*',
-  element: <Layout />,
+  element: <MainLayout />,
   children: [
     {
-      index: true,
-      element: <HomePage />,
+      path: 'books',
+      element: <BooksPage />,
+      children: [
+        {
+          path: ':category',
+          element: <BooksPage />,
+        },
+      ],
     },
     {
       path: 'profile',
@@ -55,22 +69,35 @@ const normalRoutes: RouteObject = {
       ],
     },
     {
-      path: 'dashboard',
-      element: <RequireUser allowedRoles={['ROLE_ADMIN']} />,
-      children: [
-        {
-          path: '',
-          element: <DashboardPage />,
-        },
-      ],
-    },
-    {
       path: 'unauthorized',
       element: <UnauthorizedPage />,
     },
   ],
 };
 
-const routes: RouteObject[] = [authRoutes, normalRoutes];
+const adminRoutes: RouteObject = {
+  path: '*',
+  element: <AdminLayout />,
+  children: [
+    {
+      path: 'dashboard',
+      element: <RequireUser allowedRoles={['ROLE_ADMIN']} />,
+      children: [
+        {
+          path: '',
+          element: <DashboardPage />,
+          children: [
+            {
+              path: 'books',
+              element: <BooksAdminPage />,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+const routes: RouteObject[] = [authRoutes, adminRoutes, normalRoutes];
 
 export default routes;

@@ -31,13 +31,20 @@ const SignInPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = (location.state?.from.pathname as string) || '/';
+  const stateContext = useStateContext();
+  const user = stateContext.state.authUser;
+
+  const from = (location.state as string) || '/';
 
   const methods = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
   });
 
-  const stateContext = useStateContext();
+  useEffect(() => {
+    if (user) {
+      return navigate('/');
+    }
+  }, [user]);
 
   const query = useQuery(['authUser'], getMe, {
     enabled: false,

@@ -9,6 +9,7 @@ import { object, string, TypeOf } from 'zod';
 import FormInput from '@/components/form-input/FormInput';
 import LinkItem from '@/components/link-item';
 import LoadingButton from '@/components/loading-button';
+import { useStateContext } from '@/context';
 import { signUpUser } from '@/features/auth/signup/signUpUser';
 import { queryErrorHandler, querySuccessHandler } from '@/queries/queryClient';
 
@@ -27,6 +28,7 @@ export type RegisterInput = TypeOf<typeof registerSchema>;
 const SignUpPage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const user = useStateContext().state.authUser;
 
   const methods = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
@@ -50,6 +52,12 @@ const SignUpPage = () => {
     handleSubmit,
     formState: { isSubmitSuccessful },
   } = methods;
+
+  useEffect(() => {
+    if (user) {
+      return navigate('/');
+    }
+  }, [user]);
 
   useEffect(() => {
     if (isSubmitSuccessful) {

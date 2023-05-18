@@ -36,7 +36,7 @@ const RequireUser = ({ allowedRoles }: { allowedRoles: string[] }) => {
   ) : cookies.logged_in && user ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
+    <Navigate to="/signin" state={{ from: location }} replace />
   );
 };
 

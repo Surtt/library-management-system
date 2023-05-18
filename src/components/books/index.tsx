@@ -1,39 +1,48 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
-import { getBooksThunk } from '@/features/books/booksSlice';
-import { useAppDispatch } from '@/hooks';
 import { useBooks } from '@/queries/useBooks';
+import { useCategories } from '@/queries/useCategories';
 
 import Book from './book';
 
 const Books = () => {
+  const { category } = useParams();
   const [books] = useBooks({});
-  const dispatch = useAppDispatch();
-  // const { books, filters } = useAppSelector((state) => state);
+  const [categories] = useCategories();
+  const categoryId = categories?.find((c) => c?.name.toLowerCase() === category)?.id;
 
-  // const shouldRender = () => setFilter(books.list, filters.filter);
+  const renderAllBooks = () => (
+    <>
+      {books?.map((book) => (
+        <Book key={book.id} {...book} />
+      ))}
+    </>
+  );
 
-  useEffect(() => {
-    dispatch(getBooksThunk());
-  }, [dispatch]);
+  const renderBooksByCategory = () => (
+    <>
+      {books
+        ?.filter((book) => book.category === categoryId)
+        .map((book) => (
+          <Book key={book.id} {...book} />
+        ))}
+    </>
+  );
 
   return (
     <>
-      {/*{errorBooks && <ToastContainer />}*/}
       <Box
         component="section"
         sx={{
           display: 'flex',
-          flexWrap: 'wrap',
+          // flexWrap: 'wrap',
           columnGap: 1.5,
           rowGap: 2,
-          marginTop: 5,
         }}
       >
-        {books.map((book) => (
-          <Book key={book.id} {...book} />
-        ))}
+        {!category ? renderAllBooks() : renderBooksByCategory()}
       </Box>
     </>
   );

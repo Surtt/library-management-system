@@ -3,4 +3,6 @@ export const queryKeys = {
   categories: 'categories',
   authors: 'authors',
   users: 'users',
+  checkouts: 'checkouts',
+  copies: 'copies',
 };

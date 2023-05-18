@@ -35,22 +35,27 @@ const Search = () => {
       <TextField
         onChange={handleSearch}
         sx={{
-          '.MuiInputBase-formControl': {
-            backgroundColor: theme.palette.grey['50'],
-            borderRadius: 0,
+          '& .MuiOutlinedInput-root': {
+            '&:hover fieldset': {
+              borderColor: theme.palette.secondary.main,
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: theme.palette.secondary.light,
+            },
           },
-          '.Mui-focused': {
-            color: theme.palette.secondary.main,
-          },
-          '& input::after': {
-            borderBottom: `2px solid ${theme.palette.secondary.main}`,
+          '& fieldset': {
+            borderRadius: 50,
           },
           width: 500,
         }}
         id="outlined-search"
-        label="Title, author or ISBN"
         type="search"
-        variant="filled"
+        placeholder="Title, author or ISBN"
+        variant="outlined"
+        margin="dense"
+        InputLabelProps={{
+          shrink: false,
+        }}
       />
       {debouncedSearch && (
         <List
