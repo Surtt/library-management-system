@@ -1,35 +1,43 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { borrowBookThunk } from '@/features/books/booksSlice';
-import { userBorrowBookThunk } from '@/features/users/usersSlice';
-import { useAppDispatch } from '@/hooks';
-import { useAppSelector } from '@/hooks/useAppSelector';
+import { useStateContext } from '@/context';
+import { useBookCopies } from '@/features/books/useBookCopies';
+import { useBorrowBook } from '@/features/checkout/useBorrowBook';
 import { IBook } from '@/types';
 
-const Book = ({ ISBN, title, image, status }: IBook) => {
-  const dispatch = useAppDispatch();
-  const { books, users } = useAppSelector((state) => state);
-  const currentBook = books.list.find((book) => book.ISBN === ISBN) as IBook;
+const Book = (book: IBook) => {
+  const { data: bookCopies, refetch } = useBookCopies(book.id);
+  const { mutate } = useBorrowBook();
+
   const navigate = useNavigate();
+  const user = useStateContext().state.authUser;
+  const location = useLocation();
 
   const handleBorrowBook = () => {
-    if (!users.user) {
-      navigate('/login');
+    if (!user) {
+      navigate('/signin', { state: location.pathname });
     }
-    if (currentBook) {
-      dispatch(borrowBookThunk({ id: currentBook.id, userId: users.user?.id }));
-      dispatch(userBorrowBookThunk(currentBook.id));
-    }
+
+    refetch();
+    const bookCopyId = bookCopies?.find((bookCopy) => bookCopy.status)?.id as string;
+    mutate({ bookCopyId, userId: user?.id });
   };
+
   return (
-    <Card sx={{ width: 175, display: 'flex', flexDirection: 'column' }}>
-      <CardMedia sx={{ height: 250 }} image={image} title={title} />
+    <Card sx={{ width: 250, display: 'flex', flexDirection: 'column' }}>
+      <CardMedia sx={{ height: 250 }} image={book.image} title={book.title} />
       <CardContent>
-        <Typography gutterBottom variant="subtitle1" component="h3">
-          {title}
+        <Typography gutterBottom variant="h6">
+          {book.title}
         </Typography>
+        {book.authors.map(({ id, name }) => (
+          <Typography gutterBottom key={id} variant="subtitle2">
+            by {name}
+          </Typography>
+        ))}
+        <Typography variant="subtitle2">Available: {book.quantity} copies</Typography>
       </CardContent>
       <CardActions sx={{ marginTop: 'auto' }}>
         <Button
@@ -37,9 +45,9 @@ const Book = ({ ISBN, title, image, status }: IBook) => {
           variant="outlined"
           color="inherit"
           fullWidth
-          disabled={!status}
+          disabled={!book.status}
         >
-          {status ? 'Borrow' : 'Not available'}
+          {book.status ? 'Borrow' : 'Not available'}
         </Button>
       </CardActions>
     </Card>

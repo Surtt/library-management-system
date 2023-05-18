@@ -11,12 +11,10 @@ import {
   Tooltip,
 } from '@mui/material';
 import { useCookies } from 'react-cookie';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import CustomMenuItem from '@/components/custom-menu-item';
 import { useStateContext } from '@/context';
-import { logoutUser } from '@/features/users/usersSlice';
-import { useAppDispatch } from '@/hooks';
 
 const menuData = [
   {
@@ -30,13 +28,15 @@ const menuData = [
 ];
 
 const Navigation = () => {
-  const user = useStateContext().state.authUser;
-  const dispatch = useAppDispatch();
   const stateContext = useStateContext();
-  const nameAvatar = typeof user?.firstName === 'string' && user.firstName.slice(0, 1);
+  const user = stateContext.state.authUser;
+  const navigate = useNavigate();
   const [, , removeCookie] = useCookies(['logged_in']);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const nameAvatar = typeof user?.firstName === 'string' && user.firstName.slice(0, 1);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -53,7 +53,7 @@ const Navigation = () => {
       type: 'SET_USER',
       payload: null,
     });
-    dispatch(logoutUser());
+    navigate('/');
   };
 
   return (

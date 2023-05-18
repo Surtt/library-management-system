@@ -5,7 +5,7 @@ import VisitorsBook from '@/components/books/visitors-book';
 import AddBookForm from '@/components/forms/add-book-form';
 import { useAppSelector } from '@/hooks/useAppSelector';
 
-const BooksPage = () => {
+const BooksAdminPage = () => {
   const { books } = useAppSelector((state) => state);
   const [openBookForm, setOpenBookForm] = useState(false);
 
@@ -33,4 +33,4 @@ const BooksPage = () => {
   );
 };
 
-export default BooksPage;
+export default BooksAdminPage;

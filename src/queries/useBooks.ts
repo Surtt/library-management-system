@@ -19,6 +19,6 @@ export const useBooks = ({
     getBooks,
     (books: IBook[]) => setFilter(books, filters as IBookFilter),
   );
-
+  // console.log(books, 'query');
   return [books, error, isLoading, isFetching, isError];
 };
