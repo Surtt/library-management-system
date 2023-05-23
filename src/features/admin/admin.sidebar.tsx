@@ -6,27 +6,31 @@ import AdminMenuItem from '@/features/admin/admin.menu-item';
 const sidebarItems = [
   {
     name: 'Checkouts',
-    to: '/checkouts',
+    to: 'checkouts',
   },
   {
     name: 'Books',
-    to: '/books',
+    to: 'books',
+  },
+  {
+    name: 'Book copies',
+    to: 'book-copies',
   },
   {
     name: 'Authors',
-    to: '/authors',
+    to: 'authors',
   },
   {
     name: 'Categories',
-    to: '/categories',
+    to: 'categories',
   },
   {
     name: 'Users',
-    to: '/users',
+    to: 'users',
   },
   {
     name: 'Roles',
-    to: '/roles',
+    to: 'roles',
   },
 ];
 

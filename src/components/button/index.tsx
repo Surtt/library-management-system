@@ -8,9 +8,11 @@ interface ButtonProps extends PropsWithChildren {
   styles?: CSSProperties;
   type?: 'button' | 'reset' | 'submit' | undefined;
   size?: 'small' | 'large' | 'medium' | undefined;
+  disabled?: boolean;
+  fullWidth?: boolean;
 }
 
-const Button = ({ variant, children, onClick, type, size }: ButtonProps) => {
+const Button = ({ variant, children, onClick, type, size, disabled, fullWidth }: ButtonProps) => {
   const theme = useTheme();
   return (
     <Btn
@@ -18,11 +20,15 @@ const Button = ({ variant, children, onClick, type, size }: ButtonProps) => {
       size={size}
       onClick={onClick}
       variant={variant}
+      disabled={disabled}
       sx={{
-        backgroundColor: theme.palette.secondary.light,
+        width: fullWidth ? '100%' : 'auto',
+        backgroundColor: disabled ? theme.palette.grey['300'] : theme.palette.secondary.light,
+        border: `1px solid ${theme.palette.secondary.dark}`,
         color: theme.palette.common.white,
         '&:hover': {
           backgroundColor: theme.palette.secondary.main,
+          border: `1px solid ${theme.palette.secondary.light}`,
         },
       }}
     >

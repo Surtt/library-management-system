@@ -15,17 +15,32 @@ import useDebounce from '@/hooks/useDebounce';
 const Search = () => {
   const theme = useTheme();
   const [searchValue, setSearchValue] = useState('');
-  const debouncedSearch = useDebounce(searchValue, 300);
-  const { data: books = [] } = useBooks(/*{ debouncedSearch }*/);
+  const debouncedSearch = useDebounce(searchValue, 400);
+  const { data: books = [] } = useBooks();
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
   const searchedData = () => {
     if (debouncedSearch) {
-      return books.filter((book) =>
-        book.title.toLowerCase().includes(debouncedSearch.toLowerCase()),
-      );
+      const foundBook = books.filter((book) => {
+        const title = book.title.toLowerCase();
+        const isbn = book.isbn;
+        const author = book.authors?.map((author) => author.name.toLowerCase()).join();
+        const debounce = debouncedSearch.toLowerCase();
+
+        if (title.includes(debounce)) {
+          return book.title;
+        }
+        if (isbn.includes(debounce)) {
+          return book.isbn;
+        }
+        if (author?.includes(debounce)) {
+          return author;
+        }
+      });
+
+      return foundBook;
     } else {
       return [];
     }
