@@ -15,6 +15,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import CustomMenuItem from '@/components/custom-menu-item';
 import { useStateContext } from '@/context';
+import { isAdmin } from '@/utils/isAdmin';
 
 const menuData = [
   {
@@ -59,10 +60,16 @@ const Navigation = () => {
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 2 }}>
-        {user && (
+        {isAdmin() ? (
           <Box component="ul" sx={{ display: 'flex', columnGap: 5 }}>
-            <CustomMenuItem name="My Books" to="/profile" />
+            <CustomMenuItem name="Dashboard" to="/dashboard" />
           </Box>
+        ) : (
+          user && (
+            <Box component="ul" sx={{ display: 'flex', columnGap: 5 }}>
+              <CustomMenuItem name="My Books" to="/profile" />
+            </Box>
+          )
         )}
         {!user && (
           <Box component="ul" sx={{ display: 'flex', columnGap: 5 }}>
@@ -120,19 +127,19 @@ const Navigation = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        {user?.roles?.find((r) => r.name === 'ROLE_ADMIN') ? (
-          <Link to="/dashboard">
-            <MenuItem onClick={handleClose}>
-              <Avatar /> Dashboard
-            </MenuItem>
-          </Link>
-        ) : (
-          <Link to="/profile">
-            <MenuItem onClick={handleClose}>
-              <Avatar /> Profile
-            </MenuItem>
-          </Link>
-        )}
+        {/*{user?.roles?.find((r) => r.name === 'ROLE_ADMIN') ? (*/}
+        {/*  <Link to="/dashboard">*/}
+        {/*    <MenuItem onClick={handleClose}>*/}
+        {/*      <Avatar /> Dashboard*/}
+        {/*    </MenuItem>*/}
+        {/*  </Link>*/}
+        {/*) : (*/}
+        <Link to="/profile">
+          <MenuItem onClick={handleClose}>
+            <Avatar /> Profile
+          </MenuItem>
+        </Link>
+        {/*)}*/}
         <Divider />
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>

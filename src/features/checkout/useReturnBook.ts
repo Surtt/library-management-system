@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { returnBook } from '@/features/checkout/retutnBookApi';
+import { returnBook } from '@/features/checkout/api/retutnBook';
 import { queryKeys } from '@/queries/constants';
 import { queryClient } from '@/queries/queryClient';
 

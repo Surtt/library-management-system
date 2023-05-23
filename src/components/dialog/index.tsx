@@ -4,8 +4,8 @@ import { Button, Dialog as DialogComp, DialogActions, DialogTitle } from '@mui/m
 type DialogProps = {
   title: string;
   open: boolean;
-  handleClose: () => void;
-  handleDeleteBook: () => void;
+  handleClose?: () => void;
+  handleDeleteBook?: () => void;
 };
 
 const Dialog = ({ title, open, handleClose, handleDeleteBook }: DialogProps) => {

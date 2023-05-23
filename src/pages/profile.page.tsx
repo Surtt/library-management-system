@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import VisitorsBook from '@/components/books/visitors-book';
 import ButtonBack from '@/components/button-back';
 import { useStateContext } from '@/context';
-import { getUsersCheckouts } from '@/features/checkout/usersCheckoutsApi';
+import { getUsersCheckouts } from '@/features/checkout/api/getUsersCheckouts';
 
 const ProfilePage = () => {
   const user = useStateContext().state.authUser;
