@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, useTheme } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const AdminMenuItem = ({ name }: { name: string }) => {
+const AdminMenuItem = ({ name, to }: { name: string; to: string }) => {
   const theme = useTheme();
   return (
     <Box component="li">
@@ -20,8 +20,18 @@ const AdminMenuItem = ({ name }: { name: string }) => {
             backgroundColor: theme.palette.secondary.light,
           },
         }}
-        component={Link}
-        to={`/dashboard/${name.toLowerCase()}`}
+        component={NavLink}
+        to={`/dashboard/${to.toLowerCase()}`}
+        style={({ isActive }) => {
+          return {
+            fontWeight: isActive ? 'bold' : '',
+            color: isActive ? theme.palette.common.white : '',
+            opacity: isActive ? 0.8 : '',
+            backgroundColor: isActive ? theme.palette.secondary.light : '',
+            transition: isActive ? 'all 0.4s' : '',
+            transform: isActive ? 'translate(0)' : '',
+          };
+        }}
       >
         {name}
       </Box>

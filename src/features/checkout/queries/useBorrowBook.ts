@@ -11,6 +11,7 @@ export const useBorrowBook = () => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries({ queryKey: [queryKeys.books] });
+        await queryClient.invalidateQueries({ queryKey: [queryKeys.copies] });
       },
     },
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 
-import { useReturnBook } from '@/features/checkout/useReturnBook';
+import { useReturnBook } from '@/features/checkout/queries/useReturnBook';
 import { ICheckout } from '@/types/checkout';
 
 const VisitorsBook = (checkout: ICheckout) => {

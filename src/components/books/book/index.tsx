@@ -1,14 +1,16 @@
 import React from 'react';
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Card, CardActions, CardContent, CardMedia, Typography, useTheme } from '@mui/material';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import Button from '@/components/button';
 import { useStateContext } from '@/context';
-import { useBookCopies } from '@/features/books/queries/useBookCopies';
-import { useBorrowBook } from '@/features/checkout/useBorrowBook';
+import { useBookCopiesById } from '@/features/book-copies/queries/useBookCopiesById';
+import { useBorrowBook } from '@/features/checkout/queries/useBorrowBook';
 import { IBook } from '@/types';
 
 const Book = (book: IBook) => {
-  const { data: bookCopies, refetch } = useBookCopies(book.id);
+  const theme = useTheme();
+  const { data: bookCopies, refetch } = useBookCopiesById(book.id as string);
   const { mutate } = useBorrowBook();
 
   const navigate = useNavigate();
@@ -33,26 +35,24 @@ const Book = (book: IBook) => {
         flexDirection: 'column',
       }}
     >
-      <CardMedia sx={{ height: 250 }} image={book.image} title={book.title} />
-      <CardContent>
-        <Typography gutterBottom variant="h6">
-          {book.title}
-        </Typography>
-        {book.authors.map(({ id, name }) => (
-          <Typography gutterBottom key={id} variant="subtitle2">
-            by {name}
+      <Link to={`/books/${book.id}`} state={{ previousLocation: location }}>
+        <CardMedia sx={{ height: 250 }} image={book.image} title={book.title} />
+        <CardContent>
+          <Typography gutterBottom variant="h6" color={theme.palette.grey['800']}>
+            {book.title}
           </Typography>
-        ))}
-        <Typography variant="subtitle2">Available: {book.quantity} copies</Typography>
-      </CardContent>
+          {book.authors?.map(({ id, name }) => (
+            <Typography gutterBottom key={id} variant="subtitle2" color={theme.palette.grey['800']}>
+              by {name}
+            </Typography>
+          ))}
+          <Typography variant="subtitle2" color={theme.palette.grey['800']}>
+            Available: {book.quantity} copies
+          </Typography>
+        </CardContent>
+      </Link>
       <CardActions sx={{ marginTop: 'auto' }}>
-        <Button
-          onClick={handleBorrowBook}
-          variant="outlined"
-          color="inherit"
-          fullWidth
-          disabled={!book.status}
-        >
+        <Button onClick={handleBorrowBook} variant="outlined" fullWidth disabled={!book.status}>
           {book.status ? 'Borrow' : 'Not available'}
         </Button>
       </CardActions>

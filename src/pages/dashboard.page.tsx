@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 import AuthorsAdminTable from '@/features/authors/authors.admin.table';
+import BookCopiesAdminTable from '@/features/book-copies/book-copies.admin.table';
 import BooksAdminTable from '@/features/books/books.admin.table';
 import CategoriesAdminTable from '@/features/categories/categories.admin.table';
 import CheckoutsAdminTable from '@/features/checkout/checkouts.admin.table';
@@ -19,6 +20,8 @@ const DashboardPage = () => {
       return <CheckoutsAdminTable />;
     case 'books':
       return <BooksAdminTable />;
+    case 'book-copies':
+      return <BookCopiesAdminTable />;
     default:
       return <div>dashboard</div>;
   }
