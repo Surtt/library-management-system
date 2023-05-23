@@ -3,7 +3,7 @@ import { styled } from '@mui/material';
 
 const LoadingButton = styled(_LoadingButton)(({ theme }) => ({
   padding: '0.6rem 0',
-  backgroundColor: theme.palette.secondary.dark,
+  backgroundColor: theme.palette.secondary.light,
   color: theme.palette.common.white,
   fontWeight: 500,
 

@@ -1,4 +1,4 @@
-import { MutationCache, QueryClient } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
 import { toast, ToastContent } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -26,8 +26,8 @@ export const queryClient = new QueryClient({
   //   onSuccess: querySuccessHandler,
   //   onError: queryErrorHandler,
   // }),
-  mutationCache: new MutationCache({
-    onSuccess: (message) => querySuccessHandler(message as ToastContent),
-    onError: queryErrorHandler,
-  }),
+  // mutationCache: new MutationCache({
+  //   onSuccess: (message) => querySuccessHandler(message as ToastContent),
+  //   onError: queryErrorHandler,
+  // }),
 });

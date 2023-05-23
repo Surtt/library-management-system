@@ -4,17 +4,17 @@ import { ICategory } from '@/types/category';
 import { TStatus } from './book-status';
 
 export interface IBook {
-  id: string;
+  id?: string;
   isbn: string;
   title: string;
   description: string;
   image: string;
   publisher: string;
-  status: TStatus;
+  status?: TStatus;
   publishedDate: string;
-  quantity: number;
-  category: ICategory['id'];
-  authors: IAuthor[];
+  quantity?: number;
+  category?: ICategory['id'];
+  authors?: IAuthor[];
 }
 
 export interface IBookFilter {

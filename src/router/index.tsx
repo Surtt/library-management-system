@@ -6,7 +6,6 @@ import MainLayout from '@/components/main-layout';
 import LoginPage from '@/features/auth/signin/signIn.page';
 import BooksPage from '@/features/books/books.page';
 import HomePage from '@/features/home/home.page';
-import BooksAdminPage from '@/pages/books.admin.page';
 import DashboardPage from '@/pages/dashboard.page';
 
 import FullScreenLoader from '../components/full-screen-loader';
@@ -84,14 +83,8 @@ const adminRoutes: RouteObject = {
       element: <RequireUser allowedRoles={['ROLE_ADMIN']} />,
       children: [
         {
-          path: '',
+          path: ':category',
           element: <DashboardPage />,
-          children: [
-            {
-              path: 'books',
-              element: <BooksAdminPage />,
-            },
-          ],
         },
       ],
     },

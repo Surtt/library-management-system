@@ -9,14 +9,14 @@ import {
   useTheme,
 } from '@mui/material';
 
+import { useBooks } from '@/features/books/queries/useBooks';
 import useDebounce from '@/hooks/useDebounce';
-import { useBooks } from '@/queries/useBooks';
 
 const Search = () => {
   const theme = useTheme();
   const [searchValue, setSearchValue] = useState('');
   const debouncedSearch = useDebounce(searchValue, 300);
-  const [books] = useBooks({ debouncedSearch });
+  const { data: books = [] } = useBooks(/*{ debouncedSearch }*/);
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };

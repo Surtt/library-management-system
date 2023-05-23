@@ -3,7 +3,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useStateContext } from '@/context';
-import { useBookCopies } from '@/features/books/useBookCopies';
+import { useBookCopies } from '@/features/books/queries/useBookCopies';
 import { useBorrowBook } from '@/features/checkout/useBorrowBook';
 import { IBook } from '@/types';
 
@@ -26,7 +26,13 @@ const Book = (book: IBook) => {
   };
 
   return (
-    <Card sx={{ width: 250, display: 'flex', flexDirection: 'column' }}>
+    <Card
+      sx={{
+        justifyContent: 'flex-start',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <CardMedia sx={{ height: 250 }} image={book.image} title={book.title} />
       <CardContent>
         <Typography gutterBottom variant="h6">

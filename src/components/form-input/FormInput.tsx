@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import {
   FormControl,
   FormHelperText,
@@ -21,7 +20,7 @@ type IFormInputProps = {
   label: string;
 } & InputProps;
 
-const FormInput: FC<IFormInputProps> = ({ name, label, ...otherProps }) => {
+const FormInput = ({ name, label, ...otherProps }: IFormInputProps) => {
   const theme = useTheme();
   const {
     control,
@@ -50,7 +49,7 @@ const FormInput: FC<IFormInputProps> = ({ name, label, ...otherProps }) => {
             {...otherProps}
           />
           <FormHelperText error={!!errors[name]}>
-            {errors[name] ? errors[name].message : ''}
+            {errors[name] ? errors[name]?.message : ''}
           </FormHelperText>
         </FormControl>
       )}

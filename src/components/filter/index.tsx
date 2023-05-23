@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import {
   Box,
   Checkbox,
@@ -10,14 +10,9 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 
-import { setFilterAction } from '@/features/filters/filtersSlice';
-import { useAppDispatch } from '@/hooks';
-import { useAppSelector } from '@/hooks/useAppSelector';
 import { IBookFilter } from '@/types';
 
 const Filter = () => {
-  const dispatch = useAppDispatch();
-  const { authors } = useAppSelector((state) => state);
   const [filters, setFilters] = useState<IBookFilter>({
     available: false,
     author: '',
@@ -35,10 +30,6 @@ const Filter = () => {
       author: event.target.value,
     });
   };
-
-  useEffect(() => {
-    dispatch(setFilterAction(filters));
-  }, [filters, dispatch]);
 
   return (
     <Box
@@ -73,11 +64,6 @@ const Filter = () => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {authors.list.map(({ id, name }) => (
-            <MenuItem key={id} value={id}>
-              {name}
-            </MenuItem>
-          ))}
         </Select>
       </FormControl>
     </Box>
