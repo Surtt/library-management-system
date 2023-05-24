@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 
+import Button from '@/components/button';
 import { useReturnBook } from '@/features/checkout/queries/useReturnBook';
 import { ICheckout } from '@/types/checkout';
 
@@ -23,7 +24,7 @@ const VisitorsBook = (checkout: ICheckout) => {
         </Typography>
       </CardContent>
       <CardActions sx={{ marginTop: 'auto' }}>
-        <Button onClick={handleReturnBook} variant="outlined" color="inherit" fullWidth>
+        <Button onClick={handleReturnBook} variant="outlined" fullWidth>
           Return
         </Button>
       </CardActions>

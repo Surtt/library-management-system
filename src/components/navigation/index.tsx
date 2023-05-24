@@ -67,7 +67,7 @@ const Navigation = () => {
         ) : (
           user && (
             <Box component="ul" sx={{ display: 'flex', columnGap: 5 }}>
-              <CustomMenuItem name="My Books" to="/profile" />
+              <CustomMenuItem name="My Books" to="/my-books" />
             </Box>
           )
         )}

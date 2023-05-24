@@ -7,6 +7,7 @@ import BookCopiesAdminTable from '@/features/book-copies/book-copies.admin.table
 import BooksAdminTable from '@/features/books/books.admin.table';
 import CategoriesAdminTable from '@/features/categories/categories.admin.table';
 import CheckoutsAdminTable from '@/features/checkout/checkouts.admin.table';
+import UsersAdminTable from '@/features/users/users.admin.table';
 
 const DashboardPage = () => {
   const { category } = useParams();
@@ -22,6 +23,8 @@ const DashboardPage = () => {
       return <BooksAdminTable />;
     case 'book-copies':
       return <BookCopiesAdminTable />;
+    case 'users':
+      return <UsersAdminTable />;
     default:
       return <div>dashboard</div>;
   }

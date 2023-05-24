@@ -28,10 +28,6 @@ const sidebarItems = [
     name: 'Users',
     to: 'users',
   },
-  {
-    name: 'Roles',
-    to: 'roles',
-  },
 ];
 
 const AdminSidebar = () => {
