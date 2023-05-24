@@ -8,12 +8,14 @@ import {
   TextField,
   useTheme,
 } from '@mui/material';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useBooks } from '@/features/books/queries/useBooks';
 import useDebounce from '@/hooks/useDebounce';
 
 const Search = () => {
   const theme = useTheme();
+  const location = useLocation();
   const [searchValue, setSearchValue] = useState('');
   const debouncedSearch = useDebounce(searchValue, 400);
   const { data: books = [] } = useBooks();
@@ -86,7 +88,15 @@ const Search = () => {
             .map((book) => (
               <ListItem key={book.id}>
                 <ListItemButton>
-                  <ListItemText>{book.title}</ListItemText>
+                  <Link to={`/books/${book.id}`} state={{ previousLocation: location }}>
+                    <ListItemText
+                      sx={{
+                        color: theme.palette.grey['800'],
+                      }}
+                    >
+                      {book.title}
+                    </ListItemText>
+                  </Link>
                 </ListItemButton>
               </ListItem>
             ))}

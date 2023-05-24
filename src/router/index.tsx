@@ -58,7 +58,7 @@ const normalRoutes: RouteObject = {
       ],
     },
     {
-      path: 'profile',
+      path: 'my-books',
       element: <RequireUser allowedRoles={['ROLE_READER']} />,
       children: [
         {
