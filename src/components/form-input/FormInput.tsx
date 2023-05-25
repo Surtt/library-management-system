@@ -49,7 +49,7 @@ const FormInput = ({ name, label, ...otherProps }: IFormInputProps) => {
             {...otherProps}
           />
           <FormHelperText error={!!errors[name]}>
-            {errors[name] ? errors[name]?.message : ''}
+            {errors[name] ? errors[name]?.message?.toString() : ''}
           </FormHelperText>
         </FormControl>
       )}
