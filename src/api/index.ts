@@ -7,7 +7,7 @@ if (import.meta.env.DEV) {
 }
 
 if (import.meta.env.PROD) {
-  BASE_URL = 'https://library-management-system-api-3qyl.onrender.com';
+  BASE_URL = 'https://library-management-system-api-3qyl.onrender.com/api/v1';
 }
 
 export const api = axios.create({
