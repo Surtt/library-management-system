@@ -6,6 +6,9 @@ import { defineConfig } from 'vite';
 // https://vitejs.dev/config/
 dns.setDefaultResultOrder('verbatim');
 export default defineConfig({
+  server: {
+    cors: false,
+  },
   plugins: [react()],
   resolve: {
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
