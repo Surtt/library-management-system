@@ -3,7 +3,7 @@ import type { RouteObject } from 'react-router-dom';
 
 import AdminLayout from '@/components/admin-layout';
 import MainLayout from '@/components/main-layout';
-import LoginPage from '@/features/auth/signin/signIn.page';
+import LoginPage from '@/features/auth/signin/signin.page';
 import BooksPage from '@/features/books/books.page';
 import HomePage from '@/features/home/home.page';
 import DashboardPage from '@/pages/dashboard.page';
@@ -11,7 +11,7 @@ import DashboardPage from '@/pages/dashboard.page';
 import FullScreenLoader from '../components/full-screen-loader';
 import Layout from '../components/layout';
 import ProfilePage from '../pages/profile.page';
-import RequireUser from '../pages/requireUser.page';
+import RequireUser from '../pages/require-user.page';
 
 // eslint-disable-next-line react/display-name
 const Loadable = (Component: FC) => (props: JSX.IntrinsicAttributes) =>
@@ -21,7 +21,7 @@ const Loadable = (Component: FC) => (props: JSX.IntrinsicAttributes) =>
     </Suspense>
   );
 
-const RegisterPage = Loadable(lazy(() => import('@/features/auth/signup/signUp.page')));
+const RegisterPage = Loadable(lazy(() => import('@/features/auth/signup/signup.page')));
 const UnauthorizedPage = Loadable(lazy(() => import('../pages/unauthorized.page')));
 
 const authRoutes: RouteObject = {

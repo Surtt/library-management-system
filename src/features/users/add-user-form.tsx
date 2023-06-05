@@ -3,8 +3,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { object, string, TypeOf } from 'zod';
 
-import ModalUserForm from '@/features/users/modalUserForm';
-import { useAddUser } from '@/features/users/queries/useAddUser';
+import ModalUserForm from '@/features/users/modal-user-form';
+import { useAddUser } from '@/features/users/queries/use-add-user';
 
 type FormAuthorProps = {
   open: boolean;

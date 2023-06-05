@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, useTheme } from '@mui/material';
 
 import CategoryItem from '@/features/categories/category-item';
-import { useCategories } from '@/features/categories/queries/useCategories';
+import { useCategories } from '@/features/categories/queries/use-categories';
 
 const Sidebar = () => {
   const theme = useTheme();

@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { object, string, TypeOf } from 'zod';
 
 import ModalForm from '@/components/modal-form';
-import { useAddAuthor } from '@/features/authors/queries/use-add-author';
+import { useAddCategory } from '@/features/categories/queries/use-add-category';
 
-type FormAuthorProps = {
+type FormCategoryProps = {
   open: boolean;
   handleClose: () => void;
 };
@@ -18,30 +18,30 @@ const formInputData = [
   },
 ];
 
-const addAuthorSchema = object({
+const addCategorySchema = object({
   name: string().min(1, 'Name is required').max(300),
 });
 
-export type AddAuthorInput = TypeOf<typeof addAuthorSchema>;
+export type AddCategoryInput = TypeOf<typeof addCategorySchema>;
 
-const AddAuthorForm = ({ open, handleClose }: FormAuthorProps) => {
-  const methods = useForm<AddAuthorInput>({
-    resolver: zodResolver(addAuthorSchema),
+const AddCategoryForm = ({ open, handleClose }: FormCategoryProps) => {
+  const methods = useForm<AddCategoryInput>({
+    resolver: zodResolver(addCategorySchema),
   });
 
-  const { mutate: addAuthor, isLoading } = useAddAuthor();
+  const { mutate: addCategory, isLoading } = useAddCategory();
 
   return (
     <ModalForm
       open={open}
       handleClose={handleClose}
-      mutate={addAuthor}
+      mutate={addCategory}
       isLoading={isLoading}
       methods={methods}
       formInputData={formInputData}
-      textButton="Add an author"
+      textButton="Add a category"
     />
   );
 };
 
-export default AddAuthorForm;
+export default AddCategoryForm;

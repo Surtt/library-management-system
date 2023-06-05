@@ -18,10 +18,10 @@ import {
   MuiEvent,
 } from '@mui/x-data-grid';
 
-import AddCategoryForm from '@/features/categories/AddCategoryForm';
-import { useCategories } from '@/features/categories/queries/useCategories';
-import { useDeleteCategory } from '@/features/categories/queries/useDeleteCategory';
-import { useUpdateCategory } from '@/features/categories/queries/useUpdateCategory';
+import AddCategoryForm from '@/features/categories/add-category-form';
+import { useCategories } from '@/features/categories/queries/use-categories';
+import { useDeleteCategory } from '@/features/categories/queries/use-delete-category';
+import { useUpdateCategory } from '@/features/categories/queries/use-update-category';
 
 const EditToolbar = () => {
   const theme = useTheme();

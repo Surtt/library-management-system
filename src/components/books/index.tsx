@@ -2,8 +2,8 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
-import { useBooks } from '@/features/books/queries/useBooks';
-import { useCategories } from '@/features/categories/queries/useCategories';
+import { useBooks } from '@/features/books/queries/use-books';
+import { useCategories } from '@/features/categories/queries/use-categories';
 
 import Book from './book';
 

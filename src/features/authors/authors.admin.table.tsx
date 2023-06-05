@@ -19,9 +19,9 @@ import {
 } from '@mui/x-data-grid';
 
 import AddAuthorForm from '@/features/authors/add-author-form';
-import { useAuthors } from '@/features/authors/queries/useAuthors';
-import { useDeleteAuthor } from '@/features/authors/queries/useDeleteAuthor';
-import { useUpdateAuthor } from '@/features/authors/queries/useUpdateAuthor';
+import { useAuthors } from '@/features/authors/queries/use-authors';
+import { useDeleteAuthor } from '@/features/authors/queries/use-delete-author';
+import { useUpdateAuthor } from '@/features/authors/queries/use-update-author';
 
 const EditToolbar = () => {
   const theme = useTheme();

@@ -4,10 +4,10 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import Button from '@/components/button';
 import { useStateContext } from '@/context';
-import { useBookCopiesById } from '@/features/book-copies/queries/useBookCopiesById';
-import { useBookById } from '@/features/books/queries/useBookById';
-import { useCategoryById } from '@/features/categories/queries/useCategoryById';
-import { useBorrowBook } from '@/features/checkout/queries/useBorrowBook';
+import { useBookCopiesById } from '@/features/book-copies/queries/use-book-copies-by-id';
+import { useBookById } from '@/features/books/queries/use-book-by-id';
+import { useCategoryById } from '@/features/categories/queries/use-category-by-id';
+import { useBorrowBook } from '@/features/checkout/queries/use-borrow-book';
 
 type ModalProps = {
   open: boolean;

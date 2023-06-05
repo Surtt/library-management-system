@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
-import { useCheckouts } from '@/features/checkout/queries/useCheckouts';
+import { useCheckouts } from '@/features/checkout/queries/use-checkouts';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 300 },
