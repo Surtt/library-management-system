@@ -1,4 +1,6 @@
-# Library Management System
+# Library Management System [Frontend]
+
+[Library Management System [Backend]](https://github.com/Surtt/library-management-system-api)
 
 Library management system with the possibility for the user:
 - sign up
