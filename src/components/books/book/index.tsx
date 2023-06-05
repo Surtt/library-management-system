@@ -4,8 +4,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import Button from '@/components/button';
 import { useStateContext } from '@/context';
-import { useBookCopiesById } from '@/features/book-copies/queries/useBookCopiesById';
-import { useBorrowBook } from '@/features/checkout/queries/useBorrowBook';
+import { useBookCopiesById } from '@/features/book-copies/queries/use-book-copies-by-id';
+import { useBorrowBook } from '@/features/checkout/queries/use-borrow-book';
 import { IBook } from '@/types';
 
 const Book = (book: IBook) => {

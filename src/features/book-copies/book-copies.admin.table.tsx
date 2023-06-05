@@ -13,9 +13,9 @@ import {
   MuiEvent,
 } from '@mui/x-data-grid';
 
-import AddCopyForm from '@/features/book-copies/AddCopyForm';
-import { useBookCopies } from '@/features/book-copies/queries/useBookCopies';
-import { useDeleteBookCopy } from '@/features/book-copies/queries/useDeleteBookCopy';
+import AddCopyForm from '@/features/book-copies/add-copy-form';
+import { useBookCopies } from '@/features/book-copies/queries/use-book-copies';
+import { useDeleteBookCopy } from '@/features/book-copies/queries/use-delete-book-copy';
 
 const EditToolbar = () => {
   const theme = useTheme();

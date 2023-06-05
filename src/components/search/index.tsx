@@ -10,8 +10,8 @@ import {
 } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 
-import { useBooks } from '@/features/books/queries/useBooks';
-import useDebounce from '@/hooks/useDebounce';
+import { useBooks } from '@/features/books/queries/use-books';
+import useDebounce from '@/hooks/use-debounce';
 
 const Search = () => {
   const theme = useTheme();

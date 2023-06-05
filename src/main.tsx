@@ -7,10 +7,10 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import { StateContextProvider } from '@/context';
-import AuthMiddleware from '@/middleware/AuthMiddleware';
+import AuthMiddleware from '@/middleware/auth-middleware';
 
-import { queryClient } from './queries/queryClient';
-import App from './App';
+import { queryClient } from './queries/query-client';
+import App from './app';
 
 import './index.css';
 

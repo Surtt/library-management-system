@@ -18,11 +18,11 @@ import {
   MuiEvent,
 } from '@mui/x-data-grid';
 
-import AddBookForm from '@/features/books/AddBookForm';
-import { useBooks } from '@/features/books/queries/useBooks';
-import { useDeleteBook } from '@/features/books/queries/useDeleteBook';
-import { useUpdateBook } from '@/features/books/queries/useUpdateBook';
-import { useCategories } from '@/features/categories/queries/useCategories';
+import AddBookForm from '@/features/books/Add-book-form';
+import { useBooks } from '@/features/books/queries/use-books';
+import { useDeleteBook } from '@/features/books/queries/use-delete-book';
+import { useUpdateBook } from '@/features/books/queries/use-update-book';
+import { useCategories } from '@/features/categories/queries/use-categories';
 
 const EditToolbar = () => {
   const theme = useTheme();

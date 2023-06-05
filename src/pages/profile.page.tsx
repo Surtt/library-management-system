@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 import VisitorsBook from '@/components/books/visitors-book';
 import { useStateContext } from '@/context';
-import { useCheckoutsByUserId } from '@/features/checkout/queries/useCheckoutsById';
+import { useCheckoutsByUserId } from '@/features/checkout/queries/use-checkouts-by-id';
 
 const ProfilePage = () => {
   const user = useStateContext().state.authUser;

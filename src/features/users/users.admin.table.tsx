@@ -19,9 +19,9 @@ import {
 } from '@mui/x-data-grid';
 
 import AddUserForm from '@/features/users/add-user-form';
-import { useDeleteUser } from '@/features/users/queries/useDeleteUser';
-import { useUpdateUser } from '@/features/users/queries/useUpdateUser';
-import { useUsers } from '@/features/users/queries/useUsers';
+import { useDeleteUser } from '@/features/users/queries/use-delete-user';
+import { useUpdateUser } from '@/features/users/queries/use-update-user';
+import { useUsers } from '@/features/users/queries/use-users';
 
 const EditToolbar = () => {
   const theme = useTheme();
